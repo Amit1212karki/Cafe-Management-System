@@ -1,0 +1,90 @@
+# Operating System files
+##########################
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node.js / npm
+##########################
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Laravel
+##########################
+/vendor/
+/node_modules/
+.env
+/.idea
+/.vscode
+/public/storage
+/storage/*.key
+/storage/framework/*
+/.env.testing
+
+# IDEs and Editors
+##########################
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Composer
+##########################
+/composer.lock
+/vendor/
+
+# Logs and Debug Files
+##########################
+*.log
+*.err
+*.out
+
+# Build and distribution directories
+##########################
+/build/
+/dist/
+/tmp/
+/public/storage
+
+# Miscellaneous
+##########################
+*.swp
+*.bak
+*.swo
+*.swn
+*.pid
+
+# Ignore PHPStorm files
+.idea/
+
+# Ignore tests output
+/tests-output/
+
+# Ignore config backups
+*.bak
+
+# Ignore compiled files
+*.phar
+*.class
+
+# Ignore sensitive data
+.env
+*.key
+
+# Ignore compiled JS/CSS for production builds
+/public/js/
+/public/css/
+
+# Ignore assets and images
+/public/images/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Ignore temporary files
+*.swp
+*.swo
+*.log
