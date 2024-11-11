@@ -17,8 +17,8 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'), // Always hash passwords
-            'role' => 'admin', // Add a role if you have a role field
+            'password' => Hash::make('password'), 
+            'role' => 'admin', 
         ]);
 
         // Create a staff user
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'email' => 'staff@example.com',
             'password' => Hash::make('password'),
             'role' => 'staff',
-            'branch' => 'Branch Name', // Add a branch if you have a branch field
+            'branch' => 'kalanki', 
         ]);
     }
 

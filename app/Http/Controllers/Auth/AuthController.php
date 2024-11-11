@@ -43,12 +43,12 @@ class AuthController extends Controller
 
     public function adminDashboard()
     {
-        return view('dashboard.pages.index');
+        return view('dashboard.pages.admin.index');
     }
 
     public function staffDashboard()
     {
-        return view('dashboard.pages.staffindex');
+        return view('dashboard.pages.staff.staffindex');
     }
     
 }
