@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
     public function memberIndex()
     {
-        $members = Member::all();
-        return view('members.index', compact('members'));
+        $members = Member::with('user')->get();
+        return view('dashboard.pages.staff.member.index', compact('members'));
     }
 
     public function memberCreate()
@@ -19,38 +20,41 @@ class MemberController extends Controller
         return view('dashboard.pages.staff.member.add');
     }
 
+
     public function memberStore(Request $request)
     {
-
-        
         $request->validate([
             'form_no' => 'required',
             'card_no' => 'required',
             'date' => 'required|date',
             'name' => 'required|string',
-            'gender' => 'required',
+            'gender' => 'required', 
             'email' => 'required|email',
             'address' => 'required|string',
             'dob' => 'required|date',
             'phone' => 'required'
         ]);
 
-        $storeMember = new Member();
-        $storeMember->form_no = $request->form_no;
-        $storeMember->card_no = $request->card_no;
-        $storeMember->date = $request->date;
-        $storeMember->name = $request->name;
-        $storeMember->gender = $request->gender;
-        $storeMember->email = $request->email;
-        $storeMember->address = $request->address;
-        $storeMember->dob = $request->dob;
-        $storeMember->phone = $request->phone;
-        $storeMember->user_id = auth()->id();
-        $storeMember->save();
+        try {
+            // Creating a new member
+            $storeMember = new Member();
+            $storeMember->form_no = $request->form_no;
+            $storeMember->card_no = $request->card_no;
+            $storeMember->date = $request->date;
+            $storeMember->name = $request->name;
+            $storeMember->gender = $request->gender;
+            $storeMember->email = $request->email;
+            $storeMember->address = $request->address;
+            $storeMember->dob = $request->dob;
+            $storeMember->phone = $request->phone;
+            $storeMember->user_id = Auth::id();
+            $storeMember->save();
 
-        return redirect()->route('members.index')->with('success', 'Member created successfully.');
+            return redirect()->route('members-index')->with('success', 'Member created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to create member. Please try again.' . $e->getMessage());
+        }
     }
-
     public function memberEdit($id)
     {
         $member = Member::findOrFail($id);

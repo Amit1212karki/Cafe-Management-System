@@ -19,6 +19,19 @@
         </div>
     </div>
     <!-- end page title -->
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ $message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ $message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <!-- Form row -->
     <div class="row">
         <div class="col-xl-12">
@@ -28,7 +41,8 @@
                     <p class="sub-header">
 
                     </p>
-                    <form action="{{ route('members.store') }}" method="POST">
+
+                    <form action="{{ route('members-store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="mb-2 col-md-4">
@@ -53,15 +67,12 @@
 
                             <div class="mb-2 col-md-4">
                                 <label for="inputState" class="form-label">Gender</label>
-                                <select id="inputState" class="form-select">
-                                    <option>Choose</option>
+                                <select name="gender" id="inputState" class="form-select">
+                                    <option value="">Choose</option> 
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
-
-
                                 </select>
                             </div>
-
                             <div class="mb-2 col-md-4">
                                 <label for="inputEmail4" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputEmail4"
@@ -85,7 +96,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="mb-2 col-md-12">
 
                                 <button type="submit" class="btn btn-primary text-center">Save</button>

@@ -25,6 +25,8 @@
     <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
     <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -208,7 +210,7 @@
                                 data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                 aria-expanded="false">
                                 <img src="{{ asset('assets/images/users/avatar-3.jpg') }}" alt="user-image" class="rounded-circle">
-                                <span class="ms-1 d-none d-md-inline-block"> {{ Auth::user()->name }}  <i class="mdi mdi-chevron-down"></i>
+                                <span class="ms-1 d-none d-md-inline-block"> {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
                                 </span>
                             </a>
 

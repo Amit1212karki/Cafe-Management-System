@@ -25,6 +25,8 @@
     <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
     <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -56,7 +58,7 @@
                     <li class="menu-title">Menu</li>
 
                     <li class="menu-item">
-                        <a href="/dashboard" class="menu-link waves-effect">
+                        <a href="/staff/dashboard" class="menu-link waves-effect">
                             <span class="menu-icon"><i data-lucide="airplay "></i></span>
                             <span class="menu-text"> Dashboards </span>
 
@@ -64,7 +66,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="/add-member" class="menu-link waves-effect">
+                        <a href="{{ route('members-index') }}" class="menu-link waves-effect">
                             <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar"
@@ -74,7 +76,7 @@
                                     <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                                     <path d="M3 10h18"></path>
                                 </svg></span>
-                            <span class="menu-text"> Add Member </span>
+                            <span class="menu-text">Member </span>
 
                         </a>
                     </li>
@@ -90,7 +92,7 @@
                                     <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                                     <path d="M3 10h18"></path>
                                 </svg></span>
-                            <span class="menu-text"> Add points </span>
+                            <span class="menu-text">Points </span>
 
                         </a>
                     </li>
@@ -209,7 +211,7 @@
                                 aria-expanded="false">
                                 <img src="{{ asset('assets/images/users/avatar-3.jpg') }}" alt="user-image" class="rounded-circle">
                                 <span class="ms-1 d-none d-md-inline-block">
-                                {{ Auth::user()->name }}  <i class="mdi mdi-chevron-down"></i>
+                                    {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
                                 </span>
                             </a>
 

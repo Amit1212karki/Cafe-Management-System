@@ -14,17 +14,20 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        
         $user = Auth::user();
-
-        if ($user->role === 'admin' && !$request->routeIs('admin-dashboard')) {
+    
+        // Check admin role and route access
+        if ($user->role === 'admin' && !$request->routeIs('admin-dashboard', 'members-add', 'members-store', 'members-index')) {
             return redirect()->route('admin-dashboard');
         }
-        if ($user->role === 'staff' && !$request->routeIs('staff-dashboard')) {
+    
+        // Check staff role and route access
+        if ($user->role === 'staff' && !$request->routeIs('staff-dashboard', 'members-add', 'members-store', 'members-index')) {
             return redirect()->route('staff-dashboard');
         }
+    
         return $next($request);
     }
 }
