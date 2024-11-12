@@ -45,6 +45,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4    
        
       with:
-        server: ftp.kabiraaz.com
+        server: sftp.kabiraaz.com
         username: caffe@previlage.presidentsekuwa.com.np
         password: r2XHGwfP#W%x
