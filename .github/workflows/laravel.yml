@@ -48,3 +48,4 @@ jobs:
         server: ftp.kabiraaz.com
         username: caffe@previlage.presidentsekuwa.com.np
         password: r2XHGwfP#W%x
+        protocol: ftp  
