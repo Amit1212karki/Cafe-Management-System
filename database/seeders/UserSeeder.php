@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('password'), 
             'role' => 'admin', 
+            'branch' => 'Kathmandu', 
         ]);
 
         // Create a staff user

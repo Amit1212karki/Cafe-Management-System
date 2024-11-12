@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class AuthController extends Controller
@@ -24,6 +26,33 @@ class AuthController extends Controller
         return view('dashboard.pages.index');
     }
 
+
+    public function registerUser(Request $request)
+    {
+
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6',
+                'branch' => 'required|string',
+            ]);
+    
+            $registerUser = new User();
+            $registerUser->name = $request->name;
+            $registerUser->email = $request->email;
+            $registerUser->password = Hash::make($request->password);
+            $registerUser->branch = $request->branch;
+            $registerUser->role = 'staff'; 
+            $registerUser->save();
+    
+            return redirect()->route('login')->with('success', 'Registration successful. Please login.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred during registration: ' . $e->getMessage());
+        }
+
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -38,7 +67,7 @@ class AuthController extends Controller
             }
         }
     
-        return redirect()->route('login-form')->with('error', 'Invalid credentials.');
+        return redirect()->route('login')->with('error', 'Invalid credentials.');
     }
 
     public function adminDashboard()

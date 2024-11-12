@@ -39,16 +39,34 @@
                                         </div>
 
 
-                                        <h1 class="h5 mb-1">Welcome Back!</h1>
+                                        <h1 class="h5 mb-1">Register User!!</h1>
 
-                                        <p class="text-muted mb-4">Enter your email address and password to access admin
-                                            panel.</p>
+                                        <p class="text-muted mb-4">Enter your email, password and branch to register.</p>
 
-                                        <form action="#">
+                                        @if ($message = Session::get('success'))
+                                        <div class="alert alert-success" id="alert" style="background-color: #d7f3e3;">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                        @endif
+
+                                        @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger" id="alert">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                        @endif
+                                        <form action="{{ route('register-user') }}" method="POST">
+                                            @csrf
 
                                             <div class="form-group mb-3">
+                                                <label class="form-label" for="name">Name</label>
+                                                <input class="form-control" name="name" type="text" id="name" required placeholder="Enter your name">
+                                            </div>
+                                            
+                                            <div class="form-group mb-3">
                                                 <label class="form-label" for="emailaddress">Email address</label>
-                                                <input class="form-control" type="email" id="emailaddress" required=""
+                                                <input class="form-control" name="email" type="email" id="emailaddress" required=""
                                                     placeholder="Enter your email">
                                             </div>
 
@@ -56,30 +74,19 @@
                                                 <a href="pages-recoverpw.html"
                                                     class="text-muted float-end"><small></small></a>
                                                 <label class="form-label" for="password">Password</label>
-                                                <input class="form-control" type="password" required="" id="password"
+                                                <input class="form-control" name="password" type="password" required="" id="password"
                                                     placeholder="Enter your password">
                                             </div>
 
                                             <div class="form-group mb-3">
                                                 <a href="pages-recoverpw.html"
                                                     class="text-muted float-end"><small></small></a>
-                                                <label class="form-label" for="password">Choose Branch</label>
-                                              <select class="form-control" data-toggle="select2">
-                                                    <option>Select</option>
-                                                    <option>Sundhara</option>
-                                                    <option>Kalani</option>
-                                                    <option>Balaju</option>
-                                                    <option>maharajung</option>
-                                                    <option>battishputali</option>
-                                                    <option>Narayanghat</option>
-                                                    <option>Lumbeni</option>
-                                                   
-                                                   
-                                                </select>
-                                             
+                                                <label class="form-label" for="branch">Branch</label>
+                                                <input class="form-control" name="branch" type="branch" required="" id="branch"
+                                                    placeholder="Enter your branch">
                                             </div>
 
-                                            
+
 
                                             <div class="form-group mb-3">
                                                 <div class="">
@@ -91,12 +98,12 @@
                                             </div>
 
                                             <div class="form-group mb-0 text-center">
-                                                <button class="btn btn-primary w-100" type="submit"> Log In </button>
+                                                <button class="btn btn-primary w-100" type="submit"> Register</button>
                                             </div>
                                         </form>
 
- 
-                                       
+
+
                                         <!-- end row -->
                                     </div> <!-- end .padding-5 -->
                                 </div> <!-- end col -->
