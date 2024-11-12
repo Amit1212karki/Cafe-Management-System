@@ -4,27 +4,40 @@ on:
     branches:
       - main
 jobs:
-  web-deploy:
+  web-deploy:    
     name: 🎉 Deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: 🚚 Publishing Latest Version
-      uses: actions/checkout@v3
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3 
 
-    - name: ⏬ Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    # - name: Diagnose Composer
+    #   run: composer diagnose
+      
+    - name: Set up PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
 
-    - name: 📰 Copy .env
+    - name: Install Dependencies
+      run: composer install --ignore-platform-reqs
+
+    - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
     
     # - name: Generate App Key
     #   run: php artisan key:generate
 
 
-    - name: ⏪⏩ Optimize All
+    - name: Config Clearing
+      run: php artisan config:clear
+
+    - name: OPtimizing
       run: php artisan optimize:clear
+      
+    # - name: Buil vite
+    #   run: npm run build
 
 
     # - name: Database migrating
