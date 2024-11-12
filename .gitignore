@@ -18,7 +18,6 @@ package-lock.json
 .env
 /.idea
 /.vscode
-/public/storage
 /storage/*.key
 /storage/framework/*
 /.env.testing
@@ -40,13 +39,6 @@ package-lock.json
 *.log
 *.err
 *.out
-
-# Build and distribution directories
-##########################
-/build/
-/dist/
-/tmp/
-/public/storage
 
 # Miscellaneous
 ##########################
@@ -78,11 +70,7 @@ package-lock.json
 /public/css/
 
 # Ignore assets and images
-/public/images/
-*.png
-*.jpg
-*.jpeg
-*.gif
+
 
 # Ignore temporary files
 *.swp
