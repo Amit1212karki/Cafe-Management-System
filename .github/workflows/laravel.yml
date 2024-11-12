@@ -45,6 +45,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4    
        
       with:
-        server: ftp.presidentsekuwa.com.np
+        server: ftp.presidentsekuwa.com
         username: caffe@previlage.presidentsekuwa.com.np
         password: r2XHGwfP#W%x
