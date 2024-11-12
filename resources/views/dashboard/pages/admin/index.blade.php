@@ -1,5 +1,6 @@
 @extends('dashboard.layout.adminmain')
-@section('content') <div class="container-fluid">
+@section('content')
+<div class="container-fluid">
 
     <!-- start page title -->
     <div class="py-3 py-lg-4">
