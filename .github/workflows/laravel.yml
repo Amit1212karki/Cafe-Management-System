@@ -33,8 +33,6 @@ jobs:
     - name: Config Clearing
       run: php artisan config:clear
 
-    - name: OPtimizing
-      run: php artisan optimize:clear
       
     # - name: Buil vite
     #   run: npm run build
