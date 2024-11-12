@@ -65,10 +65,6 @@ package-lock.json
 .env
 *.key
 
-# Ignore compiled JS/CSS for production builds
-/public/js/
-/public/css/
-
 # Ignore assets and images
 
 
