@@ -18,13 +18,7 @@
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <!-- App js -->
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 </head>
@@ -289,7 +283,13 @@
 
         </div>
         <!-- END wrapper -->
-
+        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
 
 </body>
 
