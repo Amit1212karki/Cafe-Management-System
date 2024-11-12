@@ -1,11 +1,11 @@
 @extends('dashboard.layout.adminmain')
-@section('content')
-<div class="container-fluid">
+@section('content') <div class="container-fluid">
+
     <!-- start page title -->
     <div class="py-3 py-lg-4">
         <div class="row">
             <div class="col-lg-6">
-                <h4 class="page-title mb-0"> Admin Dashboard</h4>
+                <h4 class="page-title mb-0">Dashboard</h4>
             </div>
             <div class="col-lg-6">
                 <div class="d-none d-lg-block">
@@ -93,43 +93,29 @@
                 </div>
             </div>
         </div>
-
         <div class="col-xl-2">
             <div class="card m-b-20">
                 <div class="card-body">
-
-
                     <div class="text-center">
                         <input data-plugin="knob" data-width="120" data-height="120" data-linecap=round
                             data-fgColor="#f1c31c" value="39" data-skin="tron" data-angleOffset="180"
                             data-readOnly=true data-thickness=".1" />
 
                         <div class="clearfix"></div>
-
-
-
                     </div>
                     <h4 class="card-title text-center">president Boutique <br> battishputali</h4>
                 </div>
             </div>
         </div>
-
-
-
         <div class="col-xl-2">
             <div class="card m-b-20">
                 <div class="card-body">
-
-
                     <div class="text-center">
                         <input data-plugin="knob" data-width="120" data-height="120" data-linecap=round
                             data-fgColor="#19c0ea" value="95" data-skin="tron" data-angleOffset="180"
                             data-readOnly=true data-thickness=".1" />
 
                         <div class="clearfix"></div>
-
-
-
                     </div>
                     <h4 class="card-title text-center">president sekuwa <br> maharajung</h4>
                 </div>
