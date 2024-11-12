@@ -1,0 +1,39 @@
+name: 🚀 Deploy website on push
+on:
+  push:
+    branches:
+      - master
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🚚 Publishing Latest Version
+      uses: actions/checkout@v3
+
+    - name: ⏬ Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: 📰 Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    
+    # - name: Generate App Key
+    #   run: php artisan key:generate
+
+
+    - name: ⏪⏩ Optimize All
+      run: php artisan optimize:clear
+
+
+    # - name: Database migrating
+    #   run: php artisan migrate
+      
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4    
+       
+      with:
+        server: ftp.presidentsekuwa.com.np
+        username: caffe@previlage.presidentsekuwa.com.np
+        password: r2XHGwfP#W%x
