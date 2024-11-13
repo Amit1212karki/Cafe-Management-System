@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 @endif
-                <div class="row mt-3">
+                <div class="row mt-3 mb-3">
                     <div class="col-md-12 d-flex justify-content-end">
                         <!-- Add Members Button wrapped with <a> and aligned to the right -->
                         <a href="/register" class="btn btn-primary">
