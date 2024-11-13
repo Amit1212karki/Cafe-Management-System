@@ -21,6 +21,15 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register-form');
     Route::post('/register', [AuthController::class, 'registerUser'])->name('register-user');
 
+    Route::get('/user-index', [AuthController::class, 'userIndex'])->name('index-user');
+    Route::get('/user-edit/{id}', [AuthController::class, 'userEdit'])->name('edit-user');
+    Route::post('/update-user/{id}', [AuthController::class, 'userUpdate'])->name('update-user');
+    Route::get('/user-delete/{id}', [AuthController::class, 'userDelete'])->name('delete-user');
+
+
+
+    
+
     // Admoin Member routes
     Route::get('/admin-index-members', [MemberController::class, 'adminMemberIndex'])->name('admin-members-index');
     Route::get('/admin-add-members', [MemberController::class, 'adminMemberCreate'])->name('admin-members-add');
