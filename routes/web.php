@@ -19,6 +19,16 @@ Route::middleware(['auth', Role::class])->group(function () {
     // Admin routes
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin-dashboard');
 
+
+
+    // Admoin Member routes
+    Route::get('/admin-index-members', [MemberController::class, 'adminMemberIndex'])->name('admin-members-index');
+    Route::get('/admin-add-members', [MemberController::class, 'adminMemberCreate'])->name('admin-members-add');
+    Route::post('/admin-store-members', [MemberController::class, 'adminMemberStore'])->name('admin-members-store');
+    Route::get('/admin-edit-members/{id}', [MemberController::class, 'adminMemberEdit'])->name('admin-members-edit');
+    Route::post('/admin-update-members/{id}', [MemberController::class, 'adminMemberUpdate'])->name('admin-members-update');
+    Route::get('/admin-delete-members/{id}', [MemberController::class, 'adminMemberDestroy'])->name('admin-members-destroy');
+
     // Staff routes
     Route::get('/staff/dashboard', [AuthController::class, 'staffDashboard'])->name('staff-dashboard');
 
@@ -28,5 +38,4 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::post('/store-members', [MemberController::class, 'memberStore'])->name('members-store');
     Route::get('/edit-members/{id}', [MemberController::class, 'memberEdit'])->name('members-edit');
     Route::post('/update-members/{id}', [MemberController::class, 'memberUpdate'])->name('members-update');
-    Route::get('/delete-members/{id}', [MemberController::class, 'memberDestroy'])->name('members-destroy');
 });

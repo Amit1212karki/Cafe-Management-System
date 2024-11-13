@@ -1,4 +1,4 @@
-@extends('dashboard.layout.adminmain')
+@extends('dashboard.layout.main')
 @section('content')
 <div class="container-fluid">
 
@@ -42,7 +42,7 @@
 
                     </p>
 
-                    <form action="{{ route('members-store') }}" method="POST">
+                    <form action="{{ route('admin-members-store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="mb-2 col-md-4">

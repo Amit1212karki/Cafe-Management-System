@@ -20,12 +20,12 @@ class Role
 
         $adminRoutes = [
             'admin-dashboard',
-            'members-add',
-            'members-edit',
-            'members-store',
-            'members-update',
-            'members-index',
-            'members-destroy',
+            'admin-members-add',
+            'admin-members-edit',
+            'admin-members-store',
+            'admin-members-update',
+            'admin-members-index',
+            'admin-members-destroy',
 
         ];
 
@@ -36,8 +36,6 @@ class Role
             'members-store',
             'members-index',
             'members-update',
-            'members-destroy',
-
         ];
 
         if ($user->role === 'admin' && !in_array($request->route()->getName(), $adminRoutes)) {

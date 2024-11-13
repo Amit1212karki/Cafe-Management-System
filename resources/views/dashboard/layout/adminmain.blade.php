@@ -51,7 +51,7 @@
                     <li class="menu-title">Menu</li>
 
                     <li class="menu-item">
-                        <a href="/dashboard" class="menu-link waves-effect">
+                        <a href="/admin/dashboard" class="menu-link waves-effect">
                             <span class="menu-icon"><i data-lucide="airplay "></i></span>
                             <span class="menu-text">Dashboards </span>
 
@@ -59,7 +59,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="add-new-member.html" class="menu-link waves-effect">
+                        <a href="{{ route('admin-members-index') }}" class="menu-link waves-effect">
                             <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar"
