@@ -89,6 +89,23 @@
 
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="search-card.html" class="menu-link waves-effect">
+                            <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar"
+                                    class="lucide lucide-calendar">
+                                    <path d="M8 2v4"></path>
+                                    <path d="M16 2v4"></path>
+                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                    <path d="M3 10h18"></path>
+                                </svg></span>
+                            <span class="menu-text">Password</span>
+
+                        </a>
+                    </li>
+                    
+                   
 
 
                     <li class="menu-item">
@@ -123,6 +140,21 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/logout" class="menu-link waves-effect">
+                            <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar"
+                                    class="lucide lucide-calendar">
+                                    <path d="M8 2v4"></path>
+                                    <path d="M16 2v4"></path>
+                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                    <path d="M3 10h18"></path>
+                                </svg></span>
+                            <span class="menu-text">Logout</span>
+
+                        </a>
                     </li>
 
                 </ul>
@@ -235,7 +267,7 @@
                                 <div class="dropdown-divider"></div>
 
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
+                                <a href="/logout" class="dropdown-item notify-item">
                                     <i data-lucide="log-out" class="font-size-16 me-2"></i>
                                     <span>Logout</span>
                                 </a>

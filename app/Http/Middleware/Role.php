@@ -32,6 +32,7 @@ class Role
             'edit-user',
             'delete-user',
             'update-user',
+            'logout',
         ];
 
         $staffRoutes = [
@@ -41,6 +42,7 @@ class Role
             'members-store',
             'members-index',
             'members-update',
+            'logout',
         ];
 
         if ($user->role === 'admin' && !in_array($request->route()->getName(), $adminRoutes)) {

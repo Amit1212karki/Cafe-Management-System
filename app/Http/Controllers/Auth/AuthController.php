@@ -134,4 +134,12 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'An error occurred while deleting the user. Please try again.');
         }
     }
+
+    public function logoutUser()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect()->route('login');
+    }
 }

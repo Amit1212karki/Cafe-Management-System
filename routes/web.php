@@ -18,8 +18,11 @@ Route::middleware(['auth', Role::class])->group(function () {
     // Admin routes
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin-dashboard');
 
+
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register-form');
     Route::post('/register', [AuthController::class, 'registerUser'])->name('register-user');
+    Route::get('/logout', [AuthController::class, 'logoutUser'])->name('logout');
+
 
     Route::get('/user-index', [AuthController::class, 'userIndex'])->name('index-user');
     Route::get('/user-edit/{id}', [AuthController::class, 'userEdit'])->name('edit-user');
