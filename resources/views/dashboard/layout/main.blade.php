@@ -2,25 +2,24 @@
 <html lang="en" data-bs-theme="light" data-menu-color="light" data-topbar-color="dark">
 
 <head>
-    <meta charset="utf-8" />
-    <title>president | privilege card system </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Myra Studio" name="author" />
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
+    <!-- TailwindCSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Morris CSS -->
     <link href="{{ asset('assets/libs/morris.js/morris.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- App css -->
+    <!-- App CSS -->
     <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('assets/js/config.js') }}"></script>
-    <!-- App js -->
 
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
+    <!-- Meta for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
 <body>
@@ -253,6 +252,8 @@
                 <!-- Start Content-->
                 @yield('content')
 
+
+
                 <!-- Footer Start -->
                 <footer class="footer">
                     <div class="container-fluid">
@@ -282,7 +283,10 @@
             <!-- ============================================================== -->
 
         </div>
+
         <!-- END wrapper -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('assets/js/config.js') }}"></script>
         <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
         <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
