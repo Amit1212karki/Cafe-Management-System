@@ -17,17 +17,37 @@ class Role
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-    
-        // Check admin role and route access
-        if ($user->role === 'admin' && !$request->routeIs('admin-dashboard', 'members-add', 'members-store', 'members-index')) {
+
+        $adminRoutes = [
+            'admin-dashboard',
+            'members-add',
+            'members-edit',
+            'members-store',
+            'members-update',
+            'members-index',
+            'members-destroy',
+
+        ];
+
+        $staffRoutes = [
+            'staff-dashboard',
+            'members-add',
+            'members-edit',
+            'members-store',
+            'members-index',
+            'members-update',
+            'members-destroy',
+
+        ];
+
+        if ($user->role === 'admin' && !in_array($request->route()->getName(), $adminRoutes)) {
             return redirect()->route('admin-dashboard');
         }
-    
-        // Check staff role and route access
-        if ($user->role === 'staff' && !$request->routeIs('staff-dashboard', 'members-add', 'members-store', 'members-index')) {
+
+        if ($user->role === 'staff' && !in_array($request->route()->getName(), $staffRoutes)) {
             return redirect()->route('staff-dashboard');
         }
-    
+
         return $next($request);
     }
 }

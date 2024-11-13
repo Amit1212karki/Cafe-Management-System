@@ -50,7 +50,7 @@
                                 <td>{{ $member->dob }}</td>
                                 <td>{{ $member->user->branch }}</td>
                                 <td class="px-6 py-4 text-right flex gap-4">
-                                    <a href="" class="font-medium text-blue-600 hover:underline">
+                                    <a href="/edit-members/{{ $member->id }}" class="font-medium text-blue-600 hover:underline">
                                         <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -59,7 +59,7 @@
                                         </svg>
 
                                     </a>
-                                    <a href="" class="font-medium text-red-600 hover:underline">
+                                    <a href="{{ route('members-destroy', $member->id) }}" class="font-medium text-red-600 hover:underline">
                                         <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

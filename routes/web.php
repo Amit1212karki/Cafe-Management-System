@@ -27,6 +27,6 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::get('/add-members', [MemberController::class, 'memberCreate'])->name('members-add');
     Route::post('/store-members', [MemberController::class, 'memberStore'])->name('members-store');
     Route::get('/edit-members/{id}', [MemberController::class, 'memberEdit'])->name('members-edit');
-    Route::put('/update-members/{id}', [MemberController::class, 'memberUpdate'])->name('members-update');
-    Route::delete('/delete-members/{id}', [MemberController::class, 'memberDestroy'])->name('members-destroy');
+    Route::post('/update-members/{id}', [MemberController::class, 'memberUpdate'])->name('members-update');
+    Route::get('/delete-members/{id}', [MemberController::class, 'memberDestroy'])->name('members-destroy');
 });

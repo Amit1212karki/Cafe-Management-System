@@ -28,7 +28,7 @@ class MemberController extends Controller
             'card_no' => 'required',
             'date' => 'required|date',
             'name' => 'required|string',
-            'gender' => 'required', 
+            'gender' => 'required',
             'email' => 'required|email',
             'address' => 'required|string',
             'dob' => 'required|date',
@@ -58,37 +58,29 @@ class MemberController extends Controller
     public function memberEdit($id)
     {
         $member = Member::findOrFail($id);
-        return view('members.edit', compact('member'));
+        return view('dashboard.pages.staff.member.edit', compact('member'));
     }
 
     public function memberUpdate(Request $request, $id)
     {
-        $request->validate([
-            'form_no' => 'required',
-            'card_no' => 'required',
-            'date' => 'required|date',
-            'name' => 'required|string',
-            'gender' => 'required',
-            'email' => 'required|email',
-            'address' => 'required|string',
-            'dob' => 'required|date',
-            'phone' => 'required'
-        ]);
+        try {
+            $updateMember = Member::findOrFail($id);
+            $updateMember->form_no = $request->form_no;
+            $updateMember->card_no = $request->card_no;
+            $updateMember->date = $request->date;
+            $updateMember->name = $request->name;
+            $updateMember->gender = $request->gender;
+            $updateMember->email = $request->email;
+            $updateMember->address = $request->address;
+            $updateMember->dob = $request->dob;
+            $updateMember->phone = $request->phone;
+            $updateMember->user_id = Auth::id();
+            $updateMember->save();
 
-        $updateMember = Member::findOrFail($id);
-        $updateMember = new Member();
-        $updateMember->form_no = $request->form_no;
-        $updateMember->card_no = $request->card_no;
-        $updateMember->date = $request->date;
-        $updateMember->name = $request->name;
-        $updateMember->gender = $request->gender;
-        $updateMember->email = $request->email;
-        $updateMember->address = $request->address;
-        $updateMember->dob = $request->dob;
-        $updateMember->phone = $request->phone;
-        $updateMember->save();
-
-        return redirect()->route('members.index')->with('success', 'Member updated successfully.');
+            return redirect()->route('members-index', $id)->with('success', 'Member updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to Update member. Please try again.' . $e->getMessage());
+        }
     }
 
     public function memberDestroy($id)
@@ -96,6 +88,6 @@ class MemberController extends Controller
         $member = Member::findOrFail($id);
         $member->delete();
 
-        return redirect()->route('members.index')->with('success', 'Member deleted successfully.');
+        return redirect()->route('members-index')->with('success', 'Member deleted successfully.');
     }
 }
