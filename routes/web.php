@@ -9,8 +9,7 @@ use App\Http\Middleware\Role;
 // Login routes
 Route::get('/', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login-submit');
-Route::get('/register', [AuthController::class, 'registerForm'])->name('register-form');
-Route::post('/register', [AuthController::class, 'registerUser'])->name('register-user');
+
 
 
 
@@ -19,7 +18,8 @@ Route::middleware(['auth', Role::class])->group(function () {
     // Admin routes
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin-dashboard');
 
-
+    Route::get('/register', [AuthController::class, 'registerForm'])->name('register-form');
+    Route::post('/register', [AuthController::class, 'registerUser'])->name('register-user');
 
     // Admoin Member routes
     Route::get('/admin-index-members', [MemberController::class, 'adminMemberIndex'])->name('admin-members-index');
