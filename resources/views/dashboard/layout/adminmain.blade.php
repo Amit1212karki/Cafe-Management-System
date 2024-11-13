@@ -69,7 +69,7 @@
                                     <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                                     <path d="M3 10h18"></path>
                                 </svg></span>
-                            <span class="menu-text"> Add Member </span>
+                            <span class="menu-text">Member </span>
 
                         </a>
                     </li>
@@ -85,7 +85,7 @@
                                     <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                                     <path d="M3 10h18"></path>
                                 </svg></span>
-                            <span class="menu-text"> Add points </span>
+                            <span class="menu-text">Points </span>
 
                         </a>
                     </li>

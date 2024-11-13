@@ -1,4 +1,4 @@
-@extends('dashboard.layout.main')
+@extends('dashboard.layout.adminmain')
 @section('content')
 <div class="container-fluid">
 
@@ -30,6 +30,15 @@
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{ $message }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
     @endif
     <!-- Form row -->

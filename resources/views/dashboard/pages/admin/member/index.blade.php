@@ -1,6 +1,5 @@
-@extends('dashboard.layout.main')
+@extends('dashboard.layout.adminmain')
 @section('content')
-
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
@@ -22,7 +21,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
-
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <div class="row mt-3">
                     <div class="col-md-12 d-flex justify-content-end">
                         <!-- Add Members Button wrapped with <a> and aligned to the right -->

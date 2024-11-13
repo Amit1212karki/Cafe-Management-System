@@ -25,14 +25,14 @@ class MemberController extends Controller
     {
         $request->validate([
             'form_no' => 'required',
-            'card_no' => 'required',
+            'card_no' => 'required|unique:members,card_no',
             'date' => 'required|date',
             'name' => 'required|string',
             'gender' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:members,email',
             'address' => 'required|string',
             'dob' => 'required|date',
-            'phone' => 'required'
+            'phone' => 'required|unique:members,phone'
         ]);
 
         try {
@@ -63,6 +63,18 @@ class MemberController extends Controller
 
     public function memberUpdate(Request $request, $id)
     {
+        $request->validate([
+            'form_no' => 'required',
+            'card_no' => 'required|unique:members,card_no,' . $id,
+            'date' => 'required|date',
+            'name' => 'required|string',
+            'gender' => 'required',
+            'email' => 'required|email|unique:members,email,' . $id,
+            'address' => 'required|string',
+            'dob' => 'required|date',
+            'phone' => 'required|unique:members,phone,' . $id
+        ]);
+
         try {
             $updateMember = Member::findOrFail($id);
             $updateMember->form_no = $request->form_no;
@@ -102,16 +114,39 @@ class MemberController extends Controller
     {
         $request->validate([
             'form_no' => 'required',
-            'card_no' => 'required',
+            'card_no' => 'required|unique:members,card_no',
             'date' => 'required|date',
             'name' => 'required|string',
             'gender' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:members,email',
             'address' => 'required|string',
             'dob' => 'required|date',
-            'phone' => 'required'
+            'phone' => 'required|unique:members,phone'
+        ], [
+            'form_no.required' => 'The form number is required.',
+            'card_no.required' => 'The card number is required.',
+            'card_no.unique' => 'The card number has already been taken.',
+            'date.required' => 'The date is required.',
+            'date.date' => 'The date must be a valid date.',
+            'name.required' => 'The name is required.',
+            'name.string' => 'The name must be a valid string.',
+            'gender.required' => 'The gender is required.',
+            'email.required' => 'The email is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.unique' => 'The email has already been taken.',
+            'address.required' => 'The address is required.',
+            'address.string' => 'The address must be a valid string.',
+            'dob.required' => 'The date of birth is required.',
+            'dob.date' => 'The date of birth must be a valid date.',
+            'phone.required' => 'The phone number is required.',
+            'phone.unique' => 'The phone number has already been taken.'
         ]);
-
+    
+        // Check if card_no, phone, or email are the same
+        if ($request->card_no === $request->phone || $request->card_no === $request->email || $request->phone === $request->email) {
+            return redirect()->back()->with('error', 'Card number, phone number, and email should not be the same.');
+        }
+    
         try {
             // Creating a new member
             $storeMember = new Member();
@@ -126,7 +161,7 @@ class MemberController extends Controller
             $storeMember->phone = $request->phone;
             $storeMember->user_id = Auth::id();
             $storeMember->save();
-
+    
             return redirect()->route('admin-members-index')->with('success', 'Member created successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create member. Please try again.' . $e->getMessage());
@@ -140,7 +175,43 @@ class MemberController extends Controller
 
     public function adminMemberUpdate(Request $request, $id)
     {
+        $request->validate([
+            'form_no' => 'required',
+            'card_no' => 'required|unique:members,card_no,' . $id,
+            'date' => 'required|date',
+            'name' => 'required|string',
+            'gender' => 'required',
+            'email' => 'required|email|unique:members,email,' . $id,
+            'address' => 'required|string',
+            'dob' => 'required|date',
+            'phone' => 'required|unique:members,phone,' . $id
+        ], [
+            'form_no.required' => 'The form number is required.',
+            'card_no.required' => 'The card number is required.',
+            'card_no.unique' => 'The card number has already been taken.',
+            'date.required' => 'The date is required.',
+            'date.date' => 'The date must be a valid date.',
+            'name.required' => 'The name is required.',
+            'name.string' => 'The name must be a valid string.',
+            'gender.required' => 'The gender is required.',
+            'email.required' => 'The email is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.unique' => 'The email has already been taken.',
+            'address.required' => 'The address is required.',
+            'address.string' => 'The address must be a valid string.',
+            'dob.required' => 'The date of birth is required.',
+            'dob.date' => 'The date of birth must be a valid date.',
+            'phone.required' => 'The phone number is required.',
+            'phone.unique' => 'The phone number has already been taken.'
+        ]);
+    
+        // Check if card_no, phone, or email are the same
+        if ($request->card_no === $request->phone || $request->card_no === $request->email || $request->phone === $request->email) {
+            return redirect()->back()->with('error', 'Card number, phone number, and email should not be the same.');
+        }
+    
         try {
+            // Find and update the member
             $updateMember = Member::findOrFail($id);
             $updateMember->form_no = $request->form_no;
             $updateMember->card_no = $request->card_no;
@@ -153,10 +224,10 @@ class MemberController extends Controller
             $updateMember->phone = $request->phone;
             $updateMember->user_id = Auth::id();
             $updateMember->save();
-
-            return redirect()->route('admin-members-index', $id)->with('success', 'Member updated successfully.');
+    
+            return redirect()->route('admin-members-index')->with('success', 'Member updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to Update member. Please try again.' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to update member. Please try again.' . $e->getMessage());
         }
     }
 
