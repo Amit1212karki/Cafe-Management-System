@@ -43,6 +43,7 @@
                     <table class="table table-centered table-striped table-nowrap">
                         <thead>
                             <tr>
+                                <th>Form No </th>
                                 <th>Card No </th>
                                 <th>Customer</th>
                                 <th>Phone</th>
@@ -54,12 +55,11 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
-
                                 @foreach ($members as $member)
                             <tr>
                                 <th>{{ $member->form_no }}</th>
+                                <td>{{ $member->card_no }}</td>
                                 <td class="table-user">
                                     <a href="javascript:void(0);" class="text-body font-weight-semibold">{{ $member->name }}</a>
                                 </td>
