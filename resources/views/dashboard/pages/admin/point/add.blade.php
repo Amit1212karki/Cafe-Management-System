@@ -88,13 +88,11 @@
 
                                     <div class="mb-2 col-md-4">
                                         <label for="inputState" class="form-label">Gender</label>
-                                        <select id="inputState" disabled class="form-select">
+                                         <select id="inputState" disabled class="form-select">
                                             <option>Choose</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-
-
-                                        </select>
+                                            <option ${member.gender === 'Male' ? 'selected' : ''}>Male</option>
+                                            <option ${member.gender === 'Female' ? 'selected' : ''}>Female</option>
+                                         </select>
                                     </div>
 
                                     <div class="mb-2 col-md-4">
