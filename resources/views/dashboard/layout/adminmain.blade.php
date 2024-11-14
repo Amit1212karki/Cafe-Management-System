@@ -348,6 +348,11 @@
         <!-- Datatables JS Page-Specific Script -->
         <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
 
+        <!-- Include jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Include Knob plugin -->
+        <script src="https://cdn.rawgit.com/aterrien/jQuery-Knob/1.2.13/dist/jquery.knob.min.js"></script>
+
 </body>
 
 </html>
