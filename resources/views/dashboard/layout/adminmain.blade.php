@@ -20,6 +20,12 @@
 
     <!-- Meta for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Third-Party CSS -->
+    <link href="{{ asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -75,7 +81,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="add-new-points.html" class="menu-link waves-effect">
+                        <a href="/add-admin-point" class="menu-link waves-effect">
                             <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar"
@@ -119,7 +125,7 @@
 
                         </a>
                     </li>
-                    
+
                     <li class="menu-item">
                         <a href="#menuTables" data-bs-toggle="collapse" class="menu-link waves-effect">
                             <span class="menu-icon"><i data-lucide="list"></i></span>
@@ -321,6 +327,26 @@
         <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
         <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
         <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+
+
+
+        <!-- Third Party JS -->
+        <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+
+        <!-- Datatables JS Page-Specific Script -->
+        <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
 
 </body>
 

@@ -26,6 +26,12 @@ class Role
             'admin-members-update',
             'admin-members-index',
             'admin-members-destroy',
+            'admin-point-add',
+            'admin-point-edit',
+            'admin-point-store',
+            'admin-point-update',
+            'admin-point-index',
+            'admin-point-destroy',
             'register-form',
             'register-user',
             'index-user',
@@ -33,6 +39,8 @@ class Role
             'delete-user',
             'update-user',
             'logout',
+            'search-member',
+
         ];
 
         $staffRoutes = [
