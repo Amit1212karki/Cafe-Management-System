@@ -72,6 +72,20 @@
 
                         <div class="col-md-9">
                             <div class="row">
+                            <div class="mb-2 col-md-4">
+                                <label for="inputZip" class="form-label"> Bill no </label>
+                                <input type="text" class="form-control" id="billno">
+                            </div>
+
+                            <div class="mb-2 col-md-4">
+                                <label for="inputZip" class="form-label"> Bill Amount</label>
+                                <input type="text" class="form-control" id="mobileno">
+                            </div>
+
+                            <div class="mb-2 col-md-4">
+                                <label for="inputZip" class="form-label"> Point </label>
+                                <input type="text" class="form-control" disabled id="mobileno">
+                            </div>
                                 <div class="mb-2 col-md-4">
                                 <label for="formno" class="form-label">Form No</label>
                                 <input type="text" class="form-control" value="${member.form_no}" disabled id="formno">
