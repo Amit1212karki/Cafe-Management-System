@@ -170,10 +170,13 @@
     // Bill amount to point calculation
     document.addEventListener('input', function(e) {
         if (e.target.id === 'billamount') {
-            const billAmount = parseFloat(e.target.value) || 0; // Get the bill amount
-            const points = (billAmount / 1000).toFixed(2);; // Calculate points with decimals
+            // Get the bill amount as a decimal number
+            const billAmount = parseFloat(e.target.value) || 0;
 
-            // Update the points display
+            // Calculate points with full precision
+            const points = (billAmount / 1000).toFixed(5); // Adjust to 4 decimal places for finer granularity
+
+            // Update the points display (input field)
             document.getElementById('point').value = points;
 
             // Update the knob value dynamically and trigger change
@@ -184,9 +187,10 @@
     // Initialize the knob
     $(document).ready(function() {
         $(".knob-input").knob({
-            step: 0.0001,
+            step: 0.0001, // Allow finer step increments
             format: function(value) {
-                return value; 
+                // Ensure knob displays the value up to 4 decimal places
+                return parseFloat(value).toFixed(5);
             }
         });
     });

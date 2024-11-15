@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
             $table->integer('points');
             $table->string('bill_no');
-            $table->string('bill_amount');
+            $table->decimal('bill_amount', 10, 2);
             $table->timestamps();
         });
     }
