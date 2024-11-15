@@ -7,18 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     protected $fillable = [
-        'user_id',
-        'member_id',
         'bill_no',
         'bill_amount',
         'points',
+        'member_id',
+        'user_id', // Include user if you want to track which admin saved the point
     ];
 
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id');
+    }
     public function user()
-{
-    return $this->belongsTo(User::class);
-    return $this->belongsTo(Member::class);
-
+    {
+        return $this->belongsTo(User::class);
+    }
+    
 }
-}
-

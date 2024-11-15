@@ -21,14 +21,22 @@
     <!-- Meta for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Third-Party CSS -->
     <link href="{{ asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </head>
 
 <body>
+
 
     <!-- Begin page -->
     <div class="layout-wrapper">
@@ -353,6 +361,8 @@
         <!-- Include Knob plugin -->
         <script src="https://cdn.rawgit.com/aterrien/jQuery-Knob/1.2.13/dist/jquery.knob.min.js"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/jquery-sparkline@2.1.2/jquery.sparkline.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

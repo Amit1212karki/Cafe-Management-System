@@ -18,6 +18,7 @@
     <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Meta for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>

@@ -16,13 +16,6 @@
                             </div>
                         </div>
                     </form>
-                    <!-- Flash Message -->
-                    @if(session('message'))
-                    <div class="alert alert-{{ session('message_type') }} alert-dismissible fade show" role="alert">
-                        {{ session('message') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
 
                     <div id="member-details">
                         <!-- Member details will appear here -->
@@ -33,6 +26,7 @@
     </div>
 </div> <!-- content -->
 
+<!-- Add some custom styles if needed -->
 <style>
     .knob-input {
         width: 64px;
@@ -56,6 +50,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-knob/dist/jquery.knob.min.js"></script>
 
 <script>
+    var storeUrl = "{{ route('admin-point-store') }}";
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = "{{ csrf_token() }}";
+
     // Search functionality
     document.getElementById('search-button').addEventListener('click', function() {
         const searchQuery = document.getElementById('search-query').value;
@@ -73,15 +70,17 @@
                     const member = response.data;
                     const memberDetailsDiv = document.getElementById('member-details');
 
-                    // Populate member details
+
                     memberDetailsDiv.innerHTML = `
-                    <form id="update-form">
+                    <form id="update-form" method="POST" action="{{ route('admin-point-store') }}">
+                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                     <div class="row">
                         <div class="col-md-9">
                             <div class="row">
                                 
-                                   <input type="text" id="user-id" value="{{ auth()->user()->id }}">
-                                    <input type="text" id="member-id" value="${member.id}">
+                                   <input type="hidden" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" id="member-id" value="${member.id}">
 
                                 <div class="mb-2 col-md-4">
                                     <label for="inputZip" class="form-label"> Bill no </label>
@@ -155,29 +154,26 @@
                         </div>
                         <div class="row">
                             <div class="mb-2  py-lg-4 mt-10 col-md-9 center text-center">
-                               <button type="submit" id="submit-button" class="btn btn-primary text-center">Update</button>
+                               <button id="submit-point" class="btn btn-primary">Save Point</button>
                                 <button type="cancel" class="btn btn-primary">Cancle </button>
                             </div>
                         </div> 
                     </div>
                     </form>
-                
                 `;
-                    $(".knob-input").knob(); // Reinitialize the knob
+                    $(".knob-input").knob(); // Initialize the knob
                 })
                 .catch(error => {
                     const memberDetailsDiv = document.getElementById('member-details');
-                    if (error.response && error.response.status === 404) {
-                        memberDetailsDiv.innerHTML = `<p>Member not found.</p>`;
-                    } else {
-                        memberDetailsDiv.innerHTML = `<p>An error occurred while fetching member details.</p>`;
-                    }
+                    memberDetailsDiv.innerHTML = `<p>An error occurred while fetching member details.</p>`;
                 });
         } else {
             alert('Please enter a card number or phone to search.');
         }
     });
 
+
+    // Calculate points based on bill amount
     document.addEventListener('input', function(e) {
         if (e.target.id === 'billamount') {
             const billAmount = parseFloat(e.target.value) || 0;
@@ -186,38 +182,43 @@
             $('#knob-point').val(points).trigger('change'); // Update knob
         }
     });
-
-    // Submit Form
-    document.getElementById('submit-button').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent form submission
-
-        const userId = document.getElementById('user-id').value;
-        const memberId = document.getElementById('member-id').value;
-        const billNo = document.getElementById('billno').value;
-        const billAmount = parseFloat(document.getElementById('billamount').value) || 0;
-        const points = parseFloat(document.getElementById('point').value) || 0;
-
-        // Check if all required fields are filled
-        if (!userId || !memberId || !billNo || !billAmount || !points) {
-            alert('Please fill all required fields.');
-            return;
+    document.getElementById('update-form').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the form from submitting
         }
+    });
+    document.getElementById('submit-point').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default button behavior
 
-        // Send data to backend using Axios
-        axios.post('/store-admin-point', {
-                user_id: userId,
-                member_id: memberId,
-                bill_no: billNo,
-                bill_amount: billAmount.toFixed(5),
-                points: points.toFixed(5),
-            })
-            .then(response => {
-                alert(response.data.message);
-            })
-            .catch(error => {
-                console.error(error);
-                alert('An error occurred while saving data.');
-            });
+        // Get form values
+        const billNo = document.getElementById('billno').value;
+        const billAmount = document.getElementById('billamount').value;
+        const points = document.getElementById('point').value;
+        const memberId = document.getElementById('member-id').value; // member ID
+        const userId = document.getElementById('user-id').value; // user ID
+
+        // Validate form values
+        if (billNo && billAmount && points && memberId && userId) {
+            // Send the data to the backend via AJAX (axios)
+            axios.post(storeUrl, {
+                    billno: billNo,
+                    billamount: billAmount,
+                    points: points,
+                    member_id: memberId,
+                    user_id: userId,
+                })
+                .then(response => {
+                    // Handle success
+                    alert(response.data.message); // Or update the UI as needed
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error(error);
+                    alert('Error saving data');
+                });
+        } else {
+            alert('Please fill in all fields.');
+        }
     });
 </script>
 
