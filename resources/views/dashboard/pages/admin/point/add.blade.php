@@ -113,11 +113,11 @@
                                     <input type="text" class="form-control" value="${member.name}" disabled id="fullname">
                                 </div>
                                 <div class="mb-2 col-md-4">
-                                    <label for="inputState" class="form-label">Gender</label>
-                                    <select id="inputState" disabled class="form-select">
-                                        <option ${member.gender === 'Male' ? 'selected' : ''}>Male</option>
-                                        <option ${member.gender === 'Female' ? 'selected' : ''}>Female</option>
-                                    </select>
+                                <label for="inputState" class="form-label">Gender</label>
+                                <select id="inputState" disabled class="form-select">
+                                    <option ${member.gender === 'M' ? 'selected' : ''}>Male</option>
+                                    <option ${member.gender === 'F' ? 'selected' : ''}>Female</option>
+                                </select>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="inputEmail4" class="form-label">Email</label>
@@ -188,7 +188,7 @@
     });
 
     // Submit Form
-    document.getElementById('submit-button').addEventListener('click', function (e) {
+    document.getElementById('submit-button').addEventListener('click', function(e) {
         e.preventDefault(); // Prevent form submission
 
         const userId = document.getElementById('user-id').value;
@@ -205,22 +205,20 @@
 
         // Send data to backend using Axios
         axios.post('/store-admin-point', {
-            user_id: userId,
-            member_id: memberId,
-            bill_no: billNo,
-            bill_amount: billAmount.toFixed(5),
-            points: points.toFixed(5),
-        })
-        .then(response => {
-            alert(response.data.message);
-        })
-        .catch(error => {
-            console.error(error);
-            alert('An error occurred while saving data.');
-        });
+                user_id: userId,
+                member_id: memberId,
+                bill_no: billNo,
+                bill_amount: billAmount.toFixed(5),
+                points: points.toFixed(5),
+            })
+            .then(response => {
+                alert(response.data.message);
+            })
+            .catch(error => {
+                console.error(error);
+                alert('An error occurred while saving data.');
+            });
     });
-
-    
 </script>
 
 @endsection
