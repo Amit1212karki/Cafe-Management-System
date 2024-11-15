@@ -43,7 +43,7 @@ Route::middleware(['auth', Role::class])->group(function () {
     // Admin Point route
     Route::get('/index-admin-point', [PointController::class, 'adminPointIndex'])->name('admin-point-index');
     Route::get('/add-admin-point', [PointController::class, 'adminPointCreate'])->name('admin-point-add');
-    Route::post('/store-admin-point', [PointController::class, 'adminPointtore'])->name('admin-point-store');
+    Route::post('/store-admin-point', [PointController::class, 'adminPointStore'])->name('admin-point-store');
     Route::get('/edit-admin-point/{id}', [PointController::class, 'adminPointEdit'])->name('admin-point-edit');
     Route::post('/update-admin-point/{id}', [PointController::class, 'adminPointUpdate'])->name('admin-point-update');
     Route::get('/admin-delete-members/{id}', [PointController::class, 'adminMemberDestroy'])->name('admin-members-destroy');

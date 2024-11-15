@@ -16,6 +16,13 @@
                             </div>
                         </div>
                     </form>
+                    <!-- Flash Message -->
+                    @if(session('message'))
+                    <div class="alert alert-{{ session('message_type') }} alert-dismissible fade show" role="alert">
+                        {{ session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
 
                     <div id="member-details">
                         <!-- Member details will appear here -->
@@ -68,9 +75,14 @@
 
                     // Populate member details
                     memberDetailsDiv.innerHTML = `
+                    <form id="update-form">
                     <div class="row">
                         <div class="col-md-9">
                             <div class="row">
+                                
+                                   <input type="text" id="user-id" value="{{ auth()->user()->id }}">
+                                    <input type="text" id="member-id" value="${member.id}">
+
                                 <div class="mb-2 col-md-4">
                                     <label for="inputZip" class="form-label"> Bill no </label>
                                     <input type="text" class="form-control" id="billno">
@@ -103,7 +115,6 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="inputState" class="form-label">Gender</label>
                                     <select id="inputState" disabled class="form-select">
-                                        <option>Choose</option>
                                         <option ${member.gender === 'Male' ? 'selected' : ''}>Male</option>
                                         <option ${member.gender === 'Female' ? 'selected' : ''}>Female</option>
                                     </select>
@@ -144,12 +155,12 @@
                         </div>
                         <div class="row">
                             <div class="mb-2  py-lg-4 mt-10 col-md-9 center text-center">
-                                <button type="submit"
-                                    class="btn btn-primary text-center">Update</button>
-                                <button type="submit" class="btn btn-primary">Cancle </button>
+                               <button type="submit" id="submit-button" class="btn btn-primary text-center">Update</button>
+                                <button type="cancel" class="btn btn-primary">Cancle </button>
                             </div>
                         </div> 
                     </div>
+                    </form>
                 
                 `;
                     $(".knob-input").knob(); // Reinitialize the knob
@@ -167,33 +178,49 @@
         }
     });
 
-    // Bill amount to point calculation
     document.addEventListener('input', function(e) {
         if (e.target.id === 'billamount') {
-            // Get the bill amount as a decimal number
             const billAmount = parseFloat(e.target.value) || 0;
-
-            // Calculate points with full precision
-            const points = (billAmount / 1000).toFixed(5); // Adjust to 4 decimal places for finer granularity
-
-            // Update the points display (input field)
+            const points = (billAmount / 1000).toFixed(5); // Convert bill amount to points
             document.getElementById('point').value = points;
-
-            // Update the knob value dynamically and trigger change
-            $('#knob-point').val(points).trigger('change');
+            $('#knob-point').val(points).trigger('change'); // Update knob
         }
     });
 
-    // Initialize the knob
-    $(document).ready(function() {
-        $(".knob-input").knob({
-            step: 0.0001, // Allow finer step increments
-            format: function(value) {
-                // Ensure knob displays the value up to 4 decimal places
-                return parseFloat(value).toFixed(5);
-            }
+    // Submit Form
+    document.getElementById('submit-button').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent form submission
+
+        const userId = document.getElementById('user-id').value;
+        const memberId = document.getElementById('member-id').value;
+        const billNo = document.getElementById('billno').value;
+        const billAmount = parseFloat(document.getElementById('billamount').value) || 0;
+        const points = parseFloat(document.getElementById('point').value) || 0;
+
+        // Check if all required fields are filled
+        if (!userId || !memberId || !billNo || !billAmount || !points) {
+            alert('Please fill all required fields.');
+            return;
+        }
+
+        // Send data to backend using Axios
+        axios.post('/store-admin-point', {
+            user_id: userId,
+            member_id: memberId,
+            bill_no: billNo,
+            bill_amount: billAmount.toFixed(5),
+            points: points.toFixed(5),
+        })
+        .then(response => {
+            alert(response.data.message);
+        })
+        .catch(error => {
+            console.error(error);
+            alert('An error occurred while saving data.');
         });
     });
+
+    
 </script>
 
 @endsection
