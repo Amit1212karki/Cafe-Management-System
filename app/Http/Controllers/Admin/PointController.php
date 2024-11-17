@@ -8,13 +8,20 @@ use App\Models\Point;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class PointController extends Controller
 {
 
     public function adminPointIndex()
     {
-        return view('dashboard.pages.admin.point.index');
+        // Retrieve the sum of points for each member grouped by member_id
+        $points = Point::select('member_id', DB::raw('ROUND(SUM(points), 5) as total_points'))
+            ->groupBy('member_id')
+            ->get();
+
+        // Return the view with the points data
+        return view('dashboard.pages.admin.point.index', compact('points'));
     }
 
     public function adminPointCreate(Request $request)
@@ -53,23 +60,26 @@ class PointController extends Controller
     public function adminPointStore(Request $request)
     {
         $request->validate([
-            'billno' => 'required|string',
-            'billamount' => 'required|numeric',
+            'bill_no' => 'required|string',
+            'bill_amount' => 'required|numeric',
             'points' => 'required|numeric',
-            'member_id' => 'required|exists:members,id', // Assuming 'members' is your members table
-            // Add other fields as necessary
+            'member_id' => 'required|exists:members,id',
+            'user_id' => 'required|exists:users,id',
         ]);
-    
-        // Save the point details into the Point model
-        $point = new Point();
-        $point->bill_no = $request->billno;
-        $point->bill_amount = $request->billamount;
-        $point->points = $request->points;
-        $point->member_id = $request->member_id; // This is the relationship with your member model
-        $point->user_id = $request->user_id; // Assuming logged-in user
-        $point->save();
 
-        return redirect()->route('admin.point.index')->with('success', 'Point record created successfully');
+        try {
+            Point::create([
+                'bill_no' => $request->bill_no,
+                'bill_amount' => $request->bill_amount,
+                'points' => $request->points,
+                'member_id' => $request->member_id,
+                'user_id' => $request->user_id,
+            ]);
+
+            return response()->json(['status' => 'success', 'message' => 'Point saved successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => 'Error saving point: ' . $e->getMessage()]);
+        }
     }
 
 

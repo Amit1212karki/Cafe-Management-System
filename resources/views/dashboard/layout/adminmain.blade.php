@@ -22,6 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Third-Party CSS -->
@@ -31,6 +32,8 @@
     <link href="{{ asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 
 </head>
@@ -325,8 +328,11 @@
         </div>
         <!-- END wrapper -->
 
-        <!-- App js -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Add this in your layout file -->
+
+
+        <!-- Axios -->
+
         <script src="{{ asset('assets/js/config.js') }}"></script>
         <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
@@ -335,6 +341,7 @@
         <script src="{{ asset('assets/libs/morris.js/morris.min.js') }}"></script>
         <script src="{{ asset('assets/libs/raphael/raphael.min.js') }}"></script>
         <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+
 
 
 
@@ -356,13 +363,7 @@
         <!-- Datatables JS Page-Specific Script -->
         <script src="{{ asset('assets/js/pages/datatables.js') }}"></script>
 
-        <!-- Include jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- Include Knob plugin -->
-        <script src="https://cdn.rawgit.com/aterrien/jQuery-Knob/1.2.13/dist/jquery.knob.min.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery-sparkline@2.1.2/jquery.sparkline.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>
