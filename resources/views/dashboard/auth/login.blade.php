@@ -69,7 +69,7 @@
                                             <div class="form-group mb-3">
                                                 <a href="pages-recoverpw.html"
                                                     class="text-muted float-end"><small></small></a>
-                                                <label class="form-label"  for="password">Password</label>
+                                                <label class="form-label" for="password">Password</label>
                                                 <input class="form-control" name="password" type="password" required="" id="password"
                                                     placeholder="Enter your password">
                                             </div>
@@ -126,6 +126,22 @@
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all alert messages
+            const alertMessages = document.querySelectorAll('.alert');
+
+            // Iterate over each alert
+            alertMessages.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.transition = "opacity 0.5s ease"; // Smooth fade-out
+                    alert.style.opacity = "0"; // Start fade-out animation
+                    setTimeout(() => alert.remove(), 500); // Remove after fade-out
+                }, 5000); // 5 seconds delay
+            });
+        });
+    </script>
 </body>
 
 </html>

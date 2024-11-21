@@ -71,6 +71,8 @@ class AuthController extends Controller
 
     public function adminDashboard()
     {
+
+    
         return view('dashboard.pages.admin.index');
     }
 
