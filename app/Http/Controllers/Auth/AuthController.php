@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -69,11 +70,29 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'Invalid credentials.');
     }
 
+    public function generateGradientColor($index, $total)
+    {
+        // Generate a color based on the index and total
+        $hue = ($index / $total) * 360; // Calculate hue from 0 to 360
+        return "hsl($hue, 70%, 50%)"; // Return HSL color (lightness and saturation can be adjusted)
+    }
     public function adminDashboard()
     {
+        $branches = User::select('branch')
+            ->selectRaw('COUNT(members.user_id) as members_count')
+            ->leftJoin('members', 'users.id', '=', 'members.user_id')  // Assuming the relation is based on 'user_id'
+            ->whereNotNull('members.user_id')
+            ->groupBy('branch')
+            ->get();
 
-    
-        return view('dashboard.pages.admin.index');
+            $branchColors = [];
+            $totalBranches = $branches->count();
+        
+            foreach ($branches as $index => $branch) {
+                $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
+            }
+
+        return view('dashboard.pages.admin.index', compact('branches', 'branchColors'));
     }
 
     public function staffDashboard()

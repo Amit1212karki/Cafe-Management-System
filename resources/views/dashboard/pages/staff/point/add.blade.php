@@ -136,6 +136,9 @@
                                         </div>
                                     </div>
                                     <h4 class="card-title text-center">Gain Points</h4>
+                                    <h4 class="card-title text-center">
+                                    ${member.name}
+                                    </h4>
                                 </div>
                             </div>
 
