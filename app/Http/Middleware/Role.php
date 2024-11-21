@@ -51,6 +51,12 @@ class Role
             'members-index',
             'members-update',
             'logout',
+            'staff-point-add',
+            'staff-point-edit',
+            'staff-point-store',
+            'staff-point-update',
+            'staff-point-index',
+            'staff-point-destroy',
         ];
 
         if ($user->role === 'admin' && !in_array($request->route()->getName(), $adminRoutes)) {

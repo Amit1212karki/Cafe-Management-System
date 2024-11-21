@@ -4,7 +4,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-
                 <h4 class="card-title">Recent Customers</h4>
                 <p class="card-subtitle mb-4 font-size-13">Transaction period from 21 July to 25 Aug
                 </p>

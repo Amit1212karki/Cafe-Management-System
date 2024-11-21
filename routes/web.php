@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Role;
 
 
-// Login routes
+// Login Routes
 Route::get('/', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login-submit');
 
@@ -16,7 +16,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login-submit');
 
 Route::middleware(['auth', Role::class])->group(function () {
 
-    // Admin routes
+    // Admin Routes
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin-dashboard');
 
 
@@ -31,7 +31,7 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::get('/user-delete/{id}', [AuthController::class, 'userDelete'])->name('delete-user');
 
 
-    // Admin Member routes
+    // Admin Member Routes
     Route::get('/admin-index-members', [MemberController::class, 'adminMemberIndex'])->name('admin-members-index');
     Route::get('/admin-add-members', [MemberController::class, 'adminMemberCreate'])->name('admin-members-add');
     Route::post('/admin-store-members', [MemberController::class, 'adminMemberStore'])->name('admin-members-store');
@@ -40,22 +40,31 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::get('/admin-delete-members/{id}', [MemberController::class, 'adminMemberDestroy'])->name('admin-members-destroy');
 
 
-    // Admin Point route
+    // Admin Point Routes
     Route::get('/index-admin-point', [PointController::class, 'adminPointIndex'])->name('admin-point-index');
     Route::get('/add-admin-point', [PointController::class, 'adminPointCreate'])->name('admin-point-add');
     Route::post('/store-admin-point', [PointController::class, 'adminPointStore'])->name('admin-point-store');
     Route::get('/edit-admin-point/{id}', [PointController::class, 'adminPointEdit'])->name('admin-point-edit');
     Route::post('/update-admin-point/{id}', [PointController::class, 'adminPointUpdate'])->name('admin-point-update');
-    Route::get('/admin-delete-members/{id}', [PointController::class, 'adminMemberDestroy'])->name('admin-members-destroy');
+    Route::get('/admin-delete-members/{id}', [PointController::class, 'adminPointDelete'])->name('admin-members-destroy');
 
 
-    // Staff routes
+    // Staff Routes
     Route::get('/staff/dashboard', [AuthController::class, 'staffDashboard'])->name('staff-dashboard');
 
-    // Member routes
+    // Staff Member Routes
     Route::get('/index-members', [MemberController::class, 'memberIndex'])->name('members-index');
     Route::get('/add-members', [MemberController::class, 'memberCreate'])->name('members-add');
     Route::post('/store-members', [MemberController::class, 'memberStore'])->name('members-store');
     Route::get('/edit-members/{id}', [MemberController::class, 'memberEdit'])->name('members-edit');
     Route::post('/update-members/{id}', [MemberController::class, 'memberUpdate'])->name('members-update');
+
+    // Staff Point Routes
+    Route::get('/index-staff-point', [PointController::class, 'staffPointIndex'])->name('staff-point-index');
+    Route::get('/add-staff-point', [PointController::class, 'staffPointCreate'])->name('staff-point-add');
+    Route::post('/store-staff-point', [PointController::class, 'staffPointStore'])->name('staff-point-store');
+    Route::get('/edit-staff-point/{id}', [PointController::class, 'staffPointEdit'])->name('staff-point-edit');
+    Route::post('/update-staff-point/{id}', [PointController::class, 'staffPointUpdate'])->name('staff-point-update');
+    Route::get('/staff-delete-members/{id}', [PointController::class, 'staffPointDelete'])->name('staff-members-destroy');
+
 });

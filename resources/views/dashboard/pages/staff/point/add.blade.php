@@ -1,6 +1,5 @@
 @extends('dashboard.layout.main')
 @section('content')
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-12">
@@ -12,7 +11,7 @@
                             <div class="col-md-9 mb-5">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Enter card no / phone" id="search-query" aria-label="Search query">
-                                    <button class="btn btn-dark waves-effect waves-light" type="button" id="search-button">Search</button>
+                                    <button class="btn btn-dark waves-effect waves-light" type="submit" id="search-button">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -52,11 +51,12 @@
 
 
 <script>
-    document.getElementById('search-button').addEventListener('click', function() {
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault()
         const searchQuery = document.getElementById('search-query').value;
 
         if (searchQuery) {
-            axios.get('/add-admin-point', {
+            axios.get('/add-staff-point', {
                     params: {
                         search: searchQuery
                     },
@@ -65,6 +65,7 @@
                     }
                 })
                 .then(response => {
+                    console.log(response.data);
                     const member = response.data;
                     const memberDetailsDiv = document.getElementById('member-details');
 
@@ -128,9 +129,10 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <div style="display:inline;width:120px;height:120px;">
-                                            <input class="knob-input" data-plugin="knob" data-width="120" data-height="120" data-linecap="round" 
-                                                   data-fgcolor="#31cb72" value="0" data-skin="tron" data-angleoffset="180" 
-                                                   data-readonly="true" data-thickness=".1" id="knob-point" data-min="0" data-max="1" data-step="0.0001">
+                                           <input class="knob-input" data-plugin="knob" data-width="120" data-height="120" data-linecap="round" 
+                                            data-fgcolor="#31cb72" value="${member.total_points}" data-skin="tron" data-angleoffset="180" 
+                                            data-readonly="true" data-thickness=".1" id="knob-point" data-min="0" data-max="1e+308" data-step="0.000001">
+
                                         </div>
                                     </div>
                                     <h4 class="card-title text-center">Gain Points</h4>
@@ -145,7 +147,8 @@
                         </div>
                     </form>
                 `;
-                    $(".knob-input").knob(); // Initialize the knob
+                    $(".knob-input").knob();
+
                 })
                 .catch(error => {
                     const memberDetailsDiv = document.getElementById('member-details');
@@ -162,7 +165,6 @@
             const billAmount = parseFloat(e.target.value) || 0;
             const points = (billAmount / 1000).toFixed(5);
             document.getElementById('point').value = points;
-            $('#knob-point').val(points).trigger('change');
         }
     });
 
@@ -189,7 +191,7 @@
         // Event delegation for dynamically generated elements
         $(document).on('submit', '#update-form', function(e) {
             e.preventDefault();
-           // Debugging
+            // Debugging
             const billNo = $('#billno').val();
             const billAmount = $('#billamount').val();
             const points = $('#point').val();
@@ -206,7 +208,7 @@
             });
 
             // Send POST request using jQuery
-            $.post("{{ route('admin-point-store') }}", {
+            $.post("{{ route('staff-point-store') }}", {
                     bill_no: billNo,
                     bill_amount: billAmount,
                     points: points,
@@ -216,7 +218,14 @@
                 .done(function(response) {
                     console.log('Response:', response); // Log success response
                     alert('Point saved successfully!');
+                    $('#search-form')[0].reset();
+                    $('#update-form')[0].reset();
+
+
+                    // Optionally clear dynamic content if you want
+                    $('#member-details').html('');
                 })
+
                 .fail(function(xhr) {
                     if (xhr.status === 422) {
                         console.log('Validation errors:', xhr.responseJSON.errors); // Log validation errors
