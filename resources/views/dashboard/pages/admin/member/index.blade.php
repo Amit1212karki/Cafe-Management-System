@@ -99,4 +99,20 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all alert messages
+        const alertMessages = document.querySelectorAll('.alert');
+
+        // Iterate over each alert
+        alertMessages.forEach(alert => {
+            setTimeout(() => {
+                alert.style.transition = "opacity 0.5s ease"; // Smooth fade-out
+                alert.style.opacity = "0"; // Start fade-out animation
+                setTimeout(() => alert.remove(), 500); // Remove after fade-out
+            }, 5000); // 5 seconds delay
+        });
+    });
+</script>
 @endsection

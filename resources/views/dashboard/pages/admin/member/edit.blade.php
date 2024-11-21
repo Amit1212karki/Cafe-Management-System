@@ -1,7 +1,6 @@
 @extends('dashboard.layout.adminmain')
 @section('content')
 <div class="container-fluid">
-
     <!-- start page title -->
     <div class="py-3 py-lg-4">
         <div class="row">
@@ -48,15 +47,13 @@
                 <div class="card-body">
                     <h4 class="header-title"></h4>
                     <p class="sub-header">
-
                     </p>
-
                     <form action="{{ route('admin-members-update', $member->id) }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="mb-2 col-md-4">
                                 <label for="formno" class="form-label">Form No</label>
-                                <input type="text" name="form_no" value="{{ $member->form_no}}"class="form-control" id="formno">
+                                <input type="text" name="form_no" value="{{ $member->form_no}}" class="form-control" id="formno">
                             </div>
 
                             <div class="mb-2 col-md-4">
@@ -116,14 +113,23 @@
             </div>
         </div>
         <!-- end col -->
-
-        <!-- end col -->
     </div>
     <!-- end row -->
-
-    <!-- end row -->
-
-
 </div> <!-- content -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all alert messages
+        const alertMessages = document.querySelectorAll('.alert');
+
+        // Iterate over each alert
+        alertMessages.forEach(alert => {
+            setTimeout(() => {
+                alert.style.transition = "opacity 0.5s ease"; // Smooth fade-out
+                alert.style.opacity = "0"; // Start fade-out animation
+                setTimeout(() => alert.remove(), 500); // Remove after fade-out
+            }, 5000); // 5 seconds delay
+        });
+    });
+</script>
 
 @endsection

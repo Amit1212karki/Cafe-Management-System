@@ -32,7 +32,7 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-12 d-flex justify-content-end">
                         <!-- Add Members Button wrapped with <a> and aligned to the right -->
-                        <a href="{{ route('admin-members-add') }}" class="btn btn-primary">
+                        <a href="{{ route('members-add') }}" class="btn btn-primary">
                             Add Members
                         </a>
                     </div>
@@ -41,6 +41,7 @@
                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr>
+                            <th>Form No </th>
                             <th>Card No </th>
                             <th>Customer</th>
                             <th>Phone</th>
@@ -51,10 +52,13 @@
                             <th>Action</th>
                         </tr>
                     </thead>
+
+
                     <tbody>
                         @foreach ($members as $member)
                         <tr>
                             <th>{{ $member->form_no }}</th>
+                            <td>{{ $member->card_no }}</td>
                             <td class="table-user">
                                 <a href="javascript:void(0);" class="text-body font-weight-semibold">{{ $member->name }}</a>
                             </td>
@@ -64,7 +68,7 @@
                             <td>{{ $member->dob }}</td>
                             <td>{{ $member->user->branch }}</td>
                             <td class="px-6 py-4 text-right flex gap-4">
-                                <a href="/edit-members/{{ $member->id }}" class="font-medium text-blue-600 hover:underline">
+                                <a href="/admin-edit-members/{{ $member->id }}" class="font-medium text-blue-600 hover:underline">
                                     <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -74,7 +78,7 @@
 
                                 </a>
                                 @if(Auth::user()->role === 'admin') <!-- Check if the authenticated user has the 'admin' role -->
-                                <a href="" class="font-medium text-red-600 hover:underline">
+                                <a href="{{ route('admin-members-destroy', $member->id) }}" class="font-medium text-red-600 hover:underline">
                                     <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -95,5 +99,21 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all alert messages
+        const alertMessages = document.querySelectorAll('.alert');
+
+        // Iterate over each alert
+        alertMessages.forEach(alert => {
+            setTimeout(() => {
+                alert.style.transition = "opacity 0.5s ease"; // Smooth fade-out
+                alert.style.opacity = "0"; // Start fade-out animation
+                setTimeout(() => alert.remove(), 500); // Remove after fade-out
+            }, 5000); // 5 seconds delay
+        });
+    });
+</script>
 
 @endsection
