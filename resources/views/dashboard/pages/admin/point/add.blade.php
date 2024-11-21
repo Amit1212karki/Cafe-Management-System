@@ -66,7 +66,9 @@
                     }
                 })
                 .then(response => {
+                    console.log(response.data); 
                     const member = response.data;
+                    
                     const memberDetailsDiv = document.getElementById('member-details');
 
                     memberDetailsDiv.innerHTML = `
@@ -130,7 +132,7 @@
                                     <div class="card-body text-center">
                                         <div style="display:inline;width:120px;height:120px;">
                                             <input class="knob-input" data-plugin="knob" data-width="120" data-height="120" data-linecap="round" 
-                                                   data-fgcolor="#31cb72" value="0" data-skin="tron" data-angleoffset="180" 
+                                                   data-fgcolor="#31cb72" value="${member.total_points || 0}" data-skin="tron" data-angleoffset="180" 
                                                    data-readonly="true" data-thickness=".1" id="knob-point" data-min="0" data-max="1" data-step="0.0001">
                                         </div>
                                     </div>

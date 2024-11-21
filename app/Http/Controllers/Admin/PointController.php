@@ -24,7 +24,7 @@ class PointController extends Controller
         return view('dashboard.pages.admin.point.index', compact('points'));
     }
 
-    public function adminPointCreate(Request $request)
+    public function adminPointCreate(Request $request,)
     {
         if ($request->ajax()) {
             $searchQuery = $request->query('search');
@@ -35,6 +35,9 @@ class PointController extends Controller
                 ->first();
 
             if ($member) {
+
+                $total_points = Point::where('member_id', $member->id)->sum('points');
+
                 return response()->json([
                     'id' => $member->id,
                     'name' => $member->name,
@@ -46,6 +49,7 @@ class PointController extends Controller
                     'dob' => $member->dob,
                     'date' => $member->date,
                     'form_no' => $member->form_no,
+                    'total_points' => $total_points,
 
                 ]);
             } else {
