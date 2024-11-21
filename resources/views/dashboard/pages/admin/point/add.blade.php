@@ -13,7 +13,7 @@
                             <div class="col-md-9 mb-5">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Enter card no / phone" id="search-query" aria-label="Search query">
-                                    <button class="btn btn-dark waves-effect waves-light" type="button" id="search-button">Search</button>
+                                    <button class="btn btn-dark waves-effect waves-light" type="submit" id="search-button">Search</button>
                                 </div>
                             </div>
                         </div>
