@@ -97,7 +97,20 @@ class AuthController extends Controller
 
     public function staffDashboard()
     {
-        return view('dashboard.pages.staff.staffindex');
+        $branches = User::select('branch')
+            ->selectRaw('COUNT(members.user_id) as members_count')
+            ->leftJoin('members', 'users.id', '=', 'members.user_id')  // Assuming the relation is based on 'user_id'
+            ->whereNotNull('members.user_id')
+            ->groupBy('branch')
+            ->get();
+
+            $branchColors = [];
+            $totalBranches = $branches->count();
+        
+            foreach ($branches as $index => $branch) {
+                $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
+            }
+        return view('dashboard.pages.staff.staffindex', compact('branches', 'branchColors'));
     }
 
     public function userIndex()

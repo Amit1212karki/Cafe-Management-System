@@ -137,10 +137,13 @@
 
                                         </div>
                                     </div>
-                                    <h4 class="card-title text-center">Gain Points By:</h4>
+                                    <h4 class="card-title text-center">Gain Points</h4>
                                      <h4 class="card-title text-center" style="color: #38a169;">
                                     ${member.name}
                                     </h4>
+                                     <h5 class="card-title text-center" style="color: #38a169;">
+                                    ${member.card_no}
+                                    </h5>
                                 </div>
                             </div>
 
