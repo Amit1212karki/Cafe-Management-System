@@ -35,8 +35,12 @@ class PointController extends Controller
                 ->first();
 
             if ($member) {
-
-                $total_points = Point::where('member_id', $member->id)->sum('points');
+                $points = Point::where('member_id', $member->id)->get();
+                $total_points = 0;
+                foreach($points as $point){
+                    
+                    $total_points = $total_points + $point->points;
+                }
 
                 return response()->json([
                     'id' => $member->id,
@@ -50,7 +54,6 @@ class PointController extends Controller
                     'date' => $member->date,
                     'form_no' => $member->form_no,
                     'total_points' => $total_points,
-
                 ]);
             } else {
                 return response()->json(['error' => 'Member not found.'], 404);
