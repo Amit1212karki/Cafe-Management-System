@@ -37,6 +37,7 @@
                             data-width="120"
                             data-height="120"
                             data-linecap="round"
+                            data-max="1e+308" 
                             data-fgColor="{{ $color }}"
                             value="{{ $totalMembers }}"
                             data-skin="tron"
