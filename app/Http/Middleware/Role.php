@@ -40,6 +40,8 @@ class Role
             'update-user',
             'logout',
             'search-member',
+            'admin-change-password',
+            'admin-update-password',
 
         ];
 

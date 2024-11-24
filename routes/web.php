@@ -20,6 +20,14 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin-dashboard');
 
 
+    Route::get('/admin/change-password/{id}', [AuthController::class, 'changePasswordIndex'])->name('admin-change-password');
+    Route::post('/admin/update-password/{id}', [AuthController::class, 'changePassword'])->name('admin-update-password');
+
+
+
+
+
+
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register-form');
     Route::post('/register', [AuthController::class, 'registerUser'])->name('register-user');
     Route::get('/logout', [AuthController::class, 'logoutUser'])->name('logout');

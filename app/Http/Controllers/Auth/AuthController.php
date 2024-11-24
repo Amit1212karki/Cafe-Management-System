@@ -85,12 +85,12 @@ class AuthController extends Controller
             ->groupBy('branch')
             ->get();
 
-            $branchColors = [];
-            $totalBranches = $branches->count();
-        
-            foreach ($branches as $index => $branch) {
-                $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
-            }
+        $branchColors = [];
+        $totalBranches = $branches->count();
+
+        foreach ($branches as $index => $branch) {
+            $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
+        }
 
         return view('dashboard.pages.admin.index', compact('branches', 'branchColors'));
     }
@@ -104,12 +104,12 @@ class AuthController extends Controller
             ->groupBy('branch')
             ->get();
 
-            $branchColors = [];
-            $totalBranches = $branches->count();
-        
-            foreach ($branches as $index => $branch) {
-                $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
-            }
+        $branchColors = [];
+        $totalBranches = $branches->count();
+
+        foreach ($branches as $index => $branch) {
+            $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
+        }
         return view('dashboard.pages.staff.staffindex', compact('branches', 'branchColors'));
     }
 
@@ -175,5 +175,31 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         return redirect()->route('login');
+    }
+
+
+
+    public function changePasswordIndex($id)
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.auth.changepassword',compact('user'));
+    }
+
+
+    public function ChangePassword(Request $request, $id)
+    {
+        $request->validate([
+            'new_password' => 'required|min:8'
+        ]);
+
+        $user = User::find($id);
+
+        if(Auth::user()->role !== 'admin'){
+            return redirect()->back()->withErrors(['error' => 'Unauthorized access.']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return redirect()->route('index-user')->with('success', "Password for user {$user->name} has been changed successfully.");
     }
 }
