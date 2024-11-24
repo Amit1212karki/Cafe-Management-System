@@ -41,6 +41,8 @@ class PointController extends Controller
                     
                     $total_points = $total_points + $point->points;
                 }
+                $branch = $member->user ? $member->user->branch : null;
+
 
                 return response()->json([
                     'id' => $member->id,
@@ -54,6 +56,8 @@ class PointController extends Controller
                     'date' => $member->date,
                     'form_no' => $member->form_no,
                     'total_points' => $total_points,
+                    'branch' => $branch,
+
                 ]);
             } else {
                 return response()->json(['error' => 'Member not found.'], 404);
@@ -132,9 +136,6 @@ class PointController extends Controller
     }
 
 
-
-
-    
     public function staffPointIndex()
     {
         // Retrieve the sum of points for each member grouped by member_id
@@ -164,6 +165,8 @@ class PointController extends Controller
                     $total_points = $total_points + $point->points;
                 }
 
+                $branch = $member->user ? $member->user->branch : null;
+
                 return response()->json([
                     'id' => $member->id,
                     'name' => $member->name,
@@ -176,6 +179,7 @@ class PointController extends Controller
                     'date' => $member->date,
                     'form_no' => $member->form_no,
                     'total_points' => $total_points,
+                    'branch' => $branch,
                 ]);
             } else {
                 return response()->json(['error' => 'Member not found.'], 404);

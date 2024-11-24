@@ -1,6 +1,6 @@
 @extends('dashboard.layout.main')
 @section('content')
-<div class="container-fluid">
+<div class="container-fluidt mt-3" >
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -142,6 +142,9 @@
                                     <h5 class="card-title text-center" style="color: #38a169;">
                                     ${member.card_no}
                                     </h5>
+                                      <h6 class="card-title text-center" style="color: #38a169;">
+                                    ${member.branch}
+                                    </h6>
                                 </div>
                             </div>
 
