@@ -133,7 +133,7 @@
                                         <div style="display:inline;width:120px;height:120px;">
                                            <input class="knob-input" data-plugin="knob" data-width="120" data-height="120" data-linecap="round" 
                                             data-fgcolor="#31cb72" value="${member.total_points}" data-skin="tron" data-angleoffset="180" 
-                                            data-readonly="true" data-thickness=".1" id="knob-point" data-min="0" data-max="1e+308" data-step="0.000001">
+                                            data-readonly="true" data-thickness=".1" id="knob-point" data-min="0" data-max="1e+308" data-step="0.00001">
 
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                     memberDetailsDiv.innerHTML = `<p>Members Not Found!</p>`;
                 });
         } else {
-            alert('Please enter a card number or phone to search.');
+            alert('Please enter a card number, or phone to search.');
         }
     });
 
