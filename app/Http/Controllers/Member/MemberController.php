@@ -11,7 +11,11 @@ class MemberController extends Controller
 {
     public function memberIndex()
     {
-        $members = Member::with('user')->get();
+        $userId = Auth::id();
+
+        $members = Member::with('user')
+        ->where('user_id', $userId) 
+        ->get();
         return view('dashboard.pages.staff.member.index', compact('members'));
     }
 
