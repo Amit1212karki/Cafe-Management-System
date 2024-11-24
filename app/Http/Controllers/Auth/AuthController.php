@@ -189,7 +189,8 @@ class AuthController extends Controller
     public function ChangePassword(Request $request, $id)
     {
         $request->validate([
-            'new_password' => 'required|min:8'
+            'password' => 'required',
+            'new_password' => 'required|min:8|confirmed'
         ]);
 
         $user = User::find($id);
@@ -198,8 +199,15 @@ class AuthController extends Controller
             return redirect()->back()->withErrors(['error' => 'Unauthorized access.']);
         }
 
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['error' => 'The current password is incorrect.']);
+        }
+        if ($request->new_password !== $request->new_password_confirmation) {
+            return redirect()->back()->withErrors(['error' => 'The new password and confirmation do not match.']);
+        }
         $user->password = Hash::make($request->new_password);
         $user->save();
         return redirect()->route('index-user')->with('success', "Password for user {$user->name} has been changed successfully.");
     }
+    
 }

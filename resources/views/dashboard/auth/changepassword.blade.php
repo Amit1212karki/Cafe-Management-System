@@ -41,11 +41,11 @@
                                 </ul>
                             </div>
                             @endif
-                            <form action="/admin/update-password/{{ $user->id }}" method="POST">
+                            <form action="/admin/update-password/{{ $user->id }}" method="POST" id="passwordForm">
                                 @csrf
 
                                 <div class="row g-3">
-                                    
+
 
                                     <div class="col-12 col-md-6">
                                         <label class="form-label" for="password">Current Password</label>
@@ -53,11 +53,12 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label" for="new_password">New Password</label>
-                                        <input class="form-control" name="new_password" type="password" required id="password" placeholder="Enter  new password">
+                                        <input class="form-control" name="new_password" type="password" required id="new_password" placeholder="Enter  new password">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label" for="password">Confirm New Password</label>
                                         <input class="form-control" name="new_password_confirmation" type="password" required id="new_password_confirmation" placeholder="Confirm  new password">
+                                        <div id="password-error" class="text-danger mt-2" style="display: none;">Passwords do not match!</div> <!-- Error message container -->
                                     </div>
 
                                 </div>
@@ -79,6 +80,29 @@
 </div>
 
 <script>
+    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+        const newPassword = document.getElementById('new_password').value;
+        const confirmPassword = document.getElementById('new_password_confirmation').value;
+        const errorMessage = document.getElementById('password-error');
+
+        if (newPassword !== confirmPassword) {
+            e.preventDefault(); // Prevent form submission
+            errorMessage.style.display = 'inline'; // Show the error message
+        }
+    });
+
+    // Optionally, clear the error when the user starts typing again
+    document.getElementById('new_password_confirmation').addEventListener('input', function() {
+        const newPassword = document.getElementById('new_password').value;
+        const confirmPassword = this.value;
+        const errorMessage = document.getElementById('password-error');
+
+        if (newPassword === confirmPassword) {
+            errorMessage.style.display = 'none'; // Hide error message
+        } else {
+            errorMessage.style.display = 'inline'; // Show error message
+        }
+    });
     document.addEventListener('DOMContentLoaded', function() {
         // Select all alert messages
         const alertMessages = document.querySelectorAll('.alert');
