@@ -92,7 +92,9 @@ class AuthController extends Controller
             $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
         }
 
-        return view('dashboard.pages.admin.index', compact('branches', 'branchColors'));
+        $recent_members = Member::with('user')->latest()->limit(5)->get();
+
+        return view('dashboard.pages.admin.index', compact('branches', 'branchColors', 'recent_members'));
     }
 
     public function staffDashboard()
@@ -106,18 +108,19 @@ class AuthController extends Controller
 
         $branchColors = [];
         $totalBranches = $branches->count();
+        
 
         foreach ($branches as $index => $branch) {
             $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
         }
-        return view('dashboard.pages.staff.staffindex', compact('branches', 'branchColors'));
+        $recent_members = Member::with('user')->where('user_id', Auth::id())->latest()->limit(5)->get();
+
+        return view('dashboard.pages.staff.staffindex', compact('branches', 'branchColors','recent_members'));
     }
 
     public function userIndex()
     {
         $all_user = User::all();
-
-
         return view('dashboard.pages.admin.user.index', compact('all_user'));
     }
 

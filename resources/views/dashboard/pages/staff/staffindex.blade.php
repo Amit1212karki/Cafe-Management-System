@@ -37,7 +37,7 @@
                             data-width="120"
                             data-height="120"
                             data-linecap="round"
-                            data-max="1e+308" 
+                            data-max="1e+308"
                             data-fgColor="{{ $color }}"
                             value="{{ $totalMembers }}"
                             data-skin="tron"
@@ -80,115 +80,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($recent_members as $member)
                                 <tr>
-                                    <th>00099 </th>
+                                    <th>{{$member->card_no}} </th>
                                     <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Paul J. Friend</a>
+                                        <a href="javascript:void(0);" class="text-body font-weight-semibold">{{$member->name}}</a>
                                     </td>
-                                    <td>
-                                        937-330-1634
-                                    </td>
-                                    <td>
-                                        pauljfrnd@jourrapide.com
-                                    </td>
-                                    <td>
-                                        New York
-                                    </td>
-                                    <td>
-                                        07/07/2018
-                                    </td>
-                                    <td>Balaju </td>
+                                    <td>{{$member->phone}}</td>
+                                    <td>{{$member->email}}</td>
+                                    <td>{{$member->address}}</td>
+                                    <td>{{$member->created_at->format('d-m-Y')}}</td>
+                                    <td>{{$member->user->branch}}</td>
                                 </tr>
-
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Bryan J. Luellen</a>
-                                    </td>
-                                    <td>
-                                        215-302-3376
-                                    </td>
-                                    <td>
-                                        bryuellen@dayrep.com
-                                    </td>
-                                    <td>
-                                        New York
-                                    </td>
-                                    <td>
-                                        09/12/2018
-                                    </td>
-                                    <td>battishputali </td>
-                                </tr>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Kathryn S.
-                                            Collier</a>
-                                    </td>
-                                    <td>
-                                        828-216-2190
-                                    </td>
-                                    <td>
-                                        collier@jourrapide.com
-                                    </td>
-                                    <td>
-                                        Canada
-                                    </td>
-                                    <td>
-                                        06/30/2018
-                                    </td>
-                                    <td>
-                                        kalanki
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Timothy Kauper</a>
-                                    </td>
-                                    <td>
-                                        (216) 75 612 706
-                                    </td>
-                                    <td>
-                                        thykauper@rhyta.com
-                                    </td>
-                                    <td>
-                                        Denmark
-                                    </td>
-                                    <td>
-                                        09/08/2018
-                                    </td>
-                                    <td>Balaju </td>
-                                </tr>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Zara Raws</a>
-                                    </td>
-                                    <td>
-                                        (02) 75 150 655
-                                    </td>
-                                    <td>
-                                        austin@dayrep.com
-                                    </td>
-                                    <td>
-                                        Germany
-                                    </td>
-                                    <td>
-                                        07/15/2018
-                                    </td>
-                                    <td>Balaju </td>
-                                </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

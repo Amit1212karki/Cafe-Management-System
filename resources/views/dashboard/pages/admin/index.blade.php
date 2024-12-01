@@ -37,7 +37,7 @@
                             data-width="120"
                             data-height="120"
                             data-linecap="round"
-                            data-max="1e+308" 
+                            data-max="1e+308"
                             data-fgColor="{{ $color }}"
                             value="{{ $totalMembers }}"
                             data-skin="tron"
@@ -58,10 +58,75 @@
 
 
     <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Recent Customers</h4>
+                    <p class="card-subtitle mb-4 font-size-13">Transaction period from 21 July to 25 Aug
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="table table-centered table-striped table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Card No </th>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Create Date</th>
+                                    <th>Branch</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($recent_members as $member )
+                                <tr>
+                                    <th>{{$member->card_no}} </th>
+                                    <td class="table-user">
+
+                                        <a href="javascript:void(0);"
+                                            class="text-body font-weight-semibold">{{$member->name}}</a>
+                                    </td>
+                                    <td>
+                                        {{$member->phone}}
+                                    </td>
+                                    <td>
+                                        {{$member->email}}
+                                    </td>
+                                    <td>
+                                        {{$member->address}}
+                                    </td>
+                                    <td>
+                                        {{$member->created_at->format('Y-m-d')}}
+                                    </td>
+                                    <td>{{$member->user->branch}} </td>
+                                </tr>
+                                @endforeach
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+
+        <!-- end row-->
+
+    </div> <!-- container -->
+
+
+
+
+
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Basic Data Table</h4>
+                    <h4 class="card-title">Recent Customers</h4>
                     <p class="text-muted font-size-13 mb-4">
                         DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
                         function:
@@ -5142,152 +5207,6 @@
             </div> <!-- end card -->
         </div><!-- end col-->
     </div>
-
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card">
-                <div class="card-body">
-
-                    <h4 class="card-title">Recent Customers</h4>
-                    <p class="card-subtitle mb-4 font-size-13">Transaction period from 21 July to 25 Aug
-                    </p>
-
-                    <div class="table-responsive">
-                        <table class="table table-centered table-striped table-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>Card No </th>
-                                    <th>Customer</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>Create Date</th>
-                                    <th>Branch</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Paul J. Friend</a>
-                                    </td>
-                                    <td>
-                                        937-330-1634
-                                    </td>
-                                    <td>
-                                        pauljfrnd@jourrapide.com
-                                    </td>
-                                    <td>
-                                        New York
-                                    </td>
-                                    <td>
-                                        07/07/2018
-                                    </td>
-                                    <td>Balaju </td>
-                                </tr>
-
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Bryan J. Luellen</a>
-                                    </td>
-                                    <td>
-                                        215-302-3376
-                                    </td>
-                                    <td>
-                                        bryuellen@dayrep.com
-                                    </td>
-                                    <td>
-                                        New York
-                                    </td>
-                                    <td>
-                                        09/12/2018
-                                    </td>
-                                    <td>battishputali </td>
-                                </tr>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Kathryn S.
-                                            Collier</a>
-                                    </td>
-                                    <td>
-                                        828-216-2190
-                                    </td>
-                                    <td>
-                                        collier@jourrapide.com
-                                    </td>
-                                    <td>
-                                        Canada
-                                    </td>
-                                    <td>
-                                        06/30/2018
-                                    </td>
-                                    <td>
-                                        kalanki
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Timothy Kauper</a>
-                                    </td>
-                                    <td>
-                                        (216) 75 612 706
-                                    </td>
-                                    <td>
-                                        thykauper@rhyta.com
-                                    </td>
-                                    <td>
-                                        Denmark
-                                    </td>
-                                    <td>
-                                        09/08/2018
-                                    </td>
-                                    <td>Balaju </td>
-                                </tr>
-                                <tr>
-                                    <th>00099 </th>
-                                    <td class="table-user">
-
-                                        <a href="javascript:void(0);"
-                                            class="text-body font-weight-semibold">Zara Raws</a>
-                                    </td>
-                                    <td>
-                                        (02) 75 150 655
-                                    </td>
-                                    <td>
-                                        austin@dayrep.com
-                                    </td>
-                                    <td>
-                                        Germany
-                                    </td>
-                                    <td>
-                                        07/15/2018
-                                    </td>
-                                    <td>Balaju </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-
-        <!-- end row-->
-
-    </div> <!-- container -->
 
 </div> <!-- content -->
 
