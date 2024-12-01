@@ -57,7 +57,16 @@
                                             <strong>{{ $message }}</strong>
                                         </div>
                                         @endif
-
+                                        @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                                <strong>{{ $error }}</strong>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
                                         <form action="{{ route('login-submit') }}" method="POST">
                                             @csrf
                                             <div class="form-group mb-3">
@@ -102,9 +111,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group mb-0 text-center">
-                                                <button class="btn btn-primary w-100" type="submit"> Log In </button>
-                                            </div>
+                                            <button class="btn btn-primary w-100" type="submit">
+                                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                                Log In
+                                            </button>
                                         </form>
 
 
@@ -140,6 +150,11 @@
                     setTimeout(() => alert.remove(), 500); // Remove after fade-out
                 }, 5000); // 5 seconds delay
             });
+        });
+        document.querySelector('form').addEventListener('submit', function() {
+            const button = this.querySelector('button[type="submit"]');
+            const spinner = button.querySelector('.spinner-border');
+            spinner.classList.remove('d-none');
         });
     </script>
 </body>

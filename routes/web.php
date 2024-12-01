@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Member\MemberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Role;
-
+use Illuminate\Database\Capsule\Manager;
 
 // Login Routes
 Route::get('/', [AuthController::class, 'loginForm'])->name('login');
@@ -19,25 +20,31 @@ Route::middleware(['auth', Role::class])->group(function () {
     // Admin Routes
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard'])->name('admin-dashboard');
 
-
+    // Change Password Routes
     Route::get('/admin/change-password/{id}', [AuthController::class, 'changePasswordIndex'])->name('admin-change-password');
     Route::post('/admin/update-password/{id}', [AuthController::class, 'changePassword'])->name('admin-update-password');
 
-
-
-
-
-
+    // User Register Routes
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register-form');
     Route::post('/register', [AuthController::class, 'registerUser'])->name('register-user');
+
+    // Logout
     Route::get('/logout', [AuthController::class, 'logoutUser'])->name('logout');
 
-
+    //User Routes
     Route::get('/user-index', [AuthController::class, 'userIndex'])->name('index-user');
     Route::get('/user-edit/{id}', [AuthController::class, 'userEdit'])->name('edit-user');
     Route::post('/update-user/{id}', [AuthController::class, 'userUpdate'])->name('update-user');
     Route::get('/user-delete/{id}', [AuthController::class, 'userDelete'])->name('delete-user');
 
+
+    // Admin Manager Routes
+    Route::get('/admin-index-manager', [ManagerController::class, 'adminManagerIndex'])->name('admin-manager-index');
+    Route::get('/admin-add-manager', [ManagerController::class, 'adminManagerCreate'])->name('admin-manager-add');
+    Route::post('/admin-store-manager', [ManagerController::class, 'adminManagerStore'])->name('admin-manager-store');
+    Route::get('/admin-edit-manager/{id}', [ManagerController::class, 'adminManagerEdit'])->name('admin-manager-edit');
+    Route::post('/admin-update-manager/{id}', [ManagerController::class, 'adminManagerUpdate'])->name('admin-manager-update');
+    Route::get('/admin-delete-manager/{id}', [ManagerController::class, 'adminManagerDestroy'])->name('admin-manager-destroy');
 
     // Admin Member Routes
     Route::get('/admin-index-members', [MemberController::class, 'adminMemberIndex'])->name('admin-members-index');
@@ -74,5 +81,4 @@ Route::middleware(['auth', Role::class])->group(function () {
     Route::get('/edit-staff-point/{id}', [PointController::class, 'staffPointEdit'])->name('staff-point-edit');
     Route::post('/update-staff-point/{id}', [PointController::class, 'staffPointUpdate'])->name('staff-point-update');
     Route::get('/staff-delete-members/{id}', [PointController::class, 'staffPointDelete'])->name('staff-members-destroy');
-
 });

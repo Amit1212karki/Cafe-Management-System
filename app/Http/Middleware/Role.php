@@ -42,6 +42,13 @@ class Role
             'search-member',
             'admin-change-password',
             'admin-update-password',
+            'admin-dashboard',
+            'admin-manager-add',
+            'admin-manager-edit',
+            'admin-manager-store',
+            'admin-manager-update',
+            'admin-manager-index',
+            'admin-manager-destroy',
 
         ];
 

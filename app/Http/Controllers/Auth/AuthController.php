@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -55,21 +56,40 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            if ($user->role === 'admin') {
-                return redirect()->route('admin-dashboard')->with('success', 'Successfully logged in as Admin.');
-            } elseif ($user->role === 'staff' && $user->branch) {
-                return redirect()->route('staff-dashboard')->with('success', 'Successfully logged in as Staff.');
-            }
+        // Validate the input
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+    
+        // Handle validation failures
+        if ($validator->fails()) {
+            return redirect()->route('login')
+                ->withErrors($validator) 
+                ->withInput(); 
         }
-
-        return redirect()->route('login')->with('error', 'Invalid credentials.');
+    
+        try {
+            $credentials = $request->only('email', 'password');
+    
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user(); 
+    
+                if ($user->role === 'admin') {
+                    return redirect()->route('admin-dashboard')->with('success', 'Successfully logged in as Admin.');
+                } elseif ($user->role === 'staff' && $user->branch) {
+                    return redirect()->route('staff-dashboard')->with('success', 'Successfully logged in as Staff.');
+                } else {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Unauthorized role.');
+                }
+            }
+            return redirect()->route('login')->with('error', 'Invalid credentials.');
+        } catch (\Exception) {
+        
+            return redirect()->route('login')->with('error', 'An error occurred during login. Please try again.');
+        }
     }
-
     public function generateGradientColor($index, $total)
     {
         // Generate a color based on the index and total
@@ -108,14 +128,14 @@ class AuthController extends Controller
 
         $branchColors = [];
         $totalBranches = $branches->count();
-        
+
 
         foreach ($branches as $index => $branch) {
             $branchColors[$branch->branch] = $this->generateGradientColor($index, $totalBranches);
         }
         $recent_members = Member::with('user')->where('user_id', Auth::id())->latest()->limit(5)->get();
 
-        return view('dashboard.pages.staff.staffindex', compact('branches', 'branchColors','recent_members'));
+        return view('dashboard.pages.staff.staffindex', compact('branches', 'branchColors', 'recent_members'));
     }
 
     public function userIndex()
@@ -185,7 +205,7 @@ class AuthController extends Controller
     public function changePasswordIndex($id)
     {
         $user = User::findOrFail($id);
-        return view('dashboard.auth.changepassword',compact('user'));
+        return view('dashboard.auth.changepassword', compact('user'));
     }
 
 
@@ -198,7 +218,7 @@ class AuthController extends Controller
 
         $user = User::find($id);
 
-        if(Auth::user()->role !== 'admin'){
+        if (Auth::user()->role !== 'admin') {
             return redirect()->back()->withErrors(['error' => 'Unauthorized access.']);
         }
 
@@ -212,5 +232,4 @@ class AuthController extends Controller
         $user->save();
         return redirect()->route('index-user')->with('success', "Password for user {$user->name} has been changed successfully.");
     }
-    
 }
